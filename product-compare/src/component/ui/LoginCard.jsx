@@ -5,25 +5,35 @@ import image1 from '../../images/btnG_완성형.png';
 import image2 from '../../images/kakao_login_large_wide.png';
 
 const Container = styled.div`
-    border: 4px solid #19CE60;
-    width: 620px;
-    height: 531px;
+    border: 2px solid #19CE60;
+    width: 500px;
+    height: 425px;
     padding: 20px;
+    border-radius: 14px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
 `;
 const ButtonWrapper = styled.div`
     
 `;
 const Input = styled.input`
+    padding: 4px;
+    font-size: 18px;
     display: block;
-    width: 558px;
-    height: 59px;
+    width: 440px;
+    height: 47px;
     border: 2px solid #19CE60;
     border-radius: 14px;
     box-sizing: border-box;
     &:focus{
         outline: none;
+    }
+    &::placeholder{
+        font-size: 12px;
+        
     }
     margin-bottom: 1px;
 `;
@@ -69,11 +79,13 @@ function LoginCard(props){
                     type="text"
                     name="id"
                     value={formData.id}
+                    placeholder="아이디를 입력해주세요"
                     onChange={handleChange}
                 />
                 <Input
                     type="password"
                     name="password"
+                    placeholder="비밀번호를 입력해주세요"
                     value={formData.password}
                     onChange={handleChange}
                 />
@@ -84,50 +96,50 @@ function LoginCard(props){
                         display: 'flex',
                     }}
                 >
-                <input 
-                    type="checkbox"
-                    name="isChecked"
-                    checked={formData.isChecked}
-                    onChange={handleChange}
-                />
-                <p>로그인 상태 유지</p>
-            </div>
+                    <input 
+                        type="checkbox"
+                        name="isChecked"
+                        checked={formData.isChecked}
+                        onChange={handleChange}
+                    />
+                    <p>로그인 상태 유지</p>
+                </div>
             </form>
             
             
             <ButtonWrapper
                 style={{
+                    width: '98%',
                     height: '64px',
                     display: 'flex',
-                    justifyContent: 'center',
                     alignItems: 'center',
-
+                    justifyContent: 'flex-end',
+                    gap: '85px',
+                    // border: '4px solid red',
+                    marginBottom: '8px',
                 }}>
                 <Button
                     style={{
-                        marginTop: '20px',
+                        
+                        marginLeft: '20px',
+                        position: 'absolute',
+                        left: '10px',
+                        top: '10px', // 버튼을 아래로 이동시킴
                     }} 
-                    title={"로그인"}
+                    title={" 로그인 "}
                     bgcolor = {'#02C75A'}
                     color = {'#ffffff'}
                     onClick= {handleSubmit}
                     />
-            </ButtonWrapper>
-            
-            <ButtonWrapper
-                style={{
-                    height: '64px',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-start',
-                }}
-            >
+                
                 <Button
                 style={{
                     marginTop: '20px',
+                    position: 'absolute',
+                    top: '1px',
                 }} 
                 title={"회원가입"}
-                bgcolor = {'#333'}
+                bgcolor = {'#6F6B6B'}
                 color = {'#ffffff'}
                 onClick= {()=>{
                     alert('회원가입 버튼 클릭')
@@ -135,6 +147,7 @@ function LoginCard(props){
                 
                 />
             </ButtonWrapper>
+            
             <div className="social-login">
                 
                 
@@ -143,8 +156,8 @@ function LoginCard(props){
                     href="javascript:void(0)"
                     style = {{
                         display: 'block',
-                        width: '558px',
-                        height: '69px',
+                        width: '440px',
+                        height: '54px',
                         backgroundImage: `url(${image2})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -157,11 +170,12 @@ function LoginCard(props){
                     className="naver-login"
                     href="javascript:void(0)"
                     style = {{
+                        backgroundColor: '#02C75A',
                         display: 'block',
-                        width: '558px',
-                        height: '69px',
+                        width: '440px',
+                        height: '54px',
                         backgroundImage: `url(${image1})`,
-                        backgroundSize: 'cover',
+                        backgroundSize: '340px 60px',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         borderRadius: '25px',

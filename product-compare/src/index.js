@@ -5,10 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Button from './component/ui/Button'
 import LoginCard from './component/ui/LoginCard';
+import LoginPage from './component/pages/LoginPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoginCard/>
+    <LoginPage/>
   </React.StrictMode>
 );
 
