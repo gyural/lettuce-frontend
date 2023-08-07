@@ -1,0 +1,48 @@
+[
+    { "id": 1, 
+    "productName": "상품 1" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 2, 
+    "productName": "상품 2" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 3, 
+    "productName": "상품 3" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 4, 
+    "productName": "상품 4" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 5, 
+    "productName": "상품 5" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 6, 
+    "productName": "상품 6" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 7, 
+    "productName": "상품 7" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 8, 
+    "productName": "상품 8" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    },
+    { "id": 9, 
+    "productName": "상품 9" ,
+    "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
+    "image" : "../images/itemListVirtual"
+    }
+    
+]
