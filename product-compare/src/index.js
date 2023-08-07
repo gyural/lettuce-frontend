@@ -6,10 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import Button from './component/ui/Button'
 import LoginCard from './component/ui/LoginCard';
 import LoginPage from './component/pages/LoginPage';
+import ItemSearchPage from './component/pages/ItemsSearchPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoginPage/>
+    <ItemSearchPage/>
   </React.StrictMode>
 );
 

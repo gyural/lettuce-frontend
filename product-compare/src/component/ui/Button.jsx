@@ -15,12 +15,13 @@ const StyleButton = styled.div`
 function Button(props){
 
 
-    const {title, bgcolor, color, onClick} = props;
+    const {title, bgcolor, color, onClick, radius} = props;
 
     return <StyleButton 
                 style ={{
                     backgroundColor : bgcolor,
-                    color: color
+                    color: color,
+                    borderRadius: radius,
                 }}
                 onClick= {onClick}
             >{title || {title}}</StyleButton>
