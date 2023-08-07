@@ -8,10 +8,12 @@ import LoginCard from './component/ui/LoginCard';
 import LoginPage from './component/pages/LoginPage';
 import SignupPage from './component/pages/SignupPage';
 import ItemSearchPage from './component/pages/ItemsSearchPage';
+import ItemBox from './component/List/ItemBox';
+import ChoiceButton from './component/ui/ChoiceButton';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SignupPage/>
+    <ItemSearchPage/>
   </React.StrictMode>
 );
 

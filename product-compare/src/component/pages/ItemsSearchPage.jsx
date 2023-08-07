@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import styled from "styled-components"
 import Button from "../ui/Button";
 import ItemInput from "../ui/ItemInput";
@@ -50,6 +51,8 @@ const Logo = styled.div`
     font-weight: 700;
 `
 function ItemsSearchPage (){
+    const navigate = useNavigate();
+
     return(
         <><Header>
             <ButtonWrapper>
@@ -61,7 +64,9 @@ function ItemsSearchPage (){
                         title={" 로그인 "}
                         bgcolor={'#58B37C'}
                         color={'#000000'}
-                        onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
+                        onClick={() => {
+                            navigate("/signin");
+                        }} />
             </ButtonWrapper>
             <ButtonWrapper>
                 <Button
@@ -100,7 +105,11 @@ function ItemsSearchPage (){
                 <p style={{
                 fontSize: '40px',
                 }}>비교하고 싶은 상품을 검색하여 AI로 비교하세요!</p>
-                <ItemInput></ItemInput>
+                <ItemInput
+                    onClick ={() =>{
+                        navigate('/select1')
+                    }}
+                ></ItemInput>
             </Container>
         </>
     )

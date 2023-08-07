@@ -12,10 +12,14 @@ const StyledInput = styled.input`
     width: 1080px;
     height: 88px;
     border-radius: 43px;
+    border: 3px #04cf5c solid;
     font-size: 28px;
     padding: 12px;
     box-sizing: border-box;
     text-align: center;
+    &:focus{
+        outline: none;
+    }
     &::placeholder{
         text-align: center;
         font-size: 24px;
@@ -35,9 +39,10 @@ const ImageWrapper = styled.div`
     position: absolute;
     z-index: 1;
 `
-function ItemInput (){
+function ItemInput (props){
     const [itemName, setItemName]= useState('')
-
+    const onClick = props.onClick
+    
     const handleChange = (e) => {
         const value = e.target.value
         setItemName(value)
@@ -55,7 +60,7 @@ function ItemInput (){
         if (itemName === ''){
             return
         }
-        alert(`${itemName} 제출`)
+        onClick()
     }
     return(
         <Container>
