@@ -1,39 +1,37 @@
-import React from "react";
+import {React, useState, useEffect, useContext} from "react";
 import styled from 'styled-components';
-import itemListVirtual from '../../virtual/itemListVirtual.json'
 import ItemBox from "./ItemBox";
-
-
-const itemList = itemListVirtual 
+import { ModeContext } from "../pages/ItemSelect1";
+import ChoiceButton from "../ui/ChoiceButton";
 
 const Container = styled.div`
-    width: 1080px;
+    width: 918px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 10px 80px;
-    
-`
-function ItemList() {
-    return (
-        <Container>
-          {itemList.map((el) => {
-            console.log(el.productName);
-            return (
-              <ItemBox
-                title={el.productName}
-                key={el.id} // key를 추가하여 각 아이템에 고유한 식별자 제공
-              />
-            );
-          })}
-        </Container>
-      );
-      
-      
-      
-      
-      
-      
+    padding: 10px 0px;
+`;
+function ItemList(props) {
+  const itemList = props.itemList;
+  const mode = props.mode
+  return (
+    <Container>
+      {itemList.map((el) => (
+        <ItemBox
+          key = {el.id}
+          getItem={props.getItem}
+          title={el.productName}
+          url={el.url}
+          src={el.image}
+          mode = {mode}
+        />
+      ))}
+    </Container>
+  );
+
+  
+  
 }
 
 export default ItemList;
+

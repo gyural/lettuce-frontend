@@ -17,6 +17,7 @@ const StyledInput = styled.input`
     padding: 12px;
     box-sizing: border-box;
     text-align: center;
+    box-shadow: 3px 3px 3px #727171;
     &:focus{
         outline: none;
     }

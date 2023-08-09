@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ItemBox from './component/List/ItemBox';
-import ChoiceButton from './component/ui/ChoiceButton';
+import Comparetable from './component/ui/Comparetable';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
