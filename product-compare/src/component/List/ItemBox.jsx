@@ -1,17 +1,17 @@
-import {React, useState} from "react";
+import {React, useState, useContext} from "react";
 import styled from 'styled-components';
-import sampleImage from '../../images/상품이지지 예시.jpg'
+import { ModeContext } from "../pages/ItemSelect1";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
 `
 const Wrapper = styled.div`
-    width: 300px;
+    width: 200px;
     height: 200px;
     padding: 3px 2px;
     overflow: hidden;
@@ -26,36 +26,39 @@ const Wrapper = styled.div`
 `
 
 function ItemBox(props){
+    const mode = props.mode
+    const getItem = props.getItem
     const title = props.title;
-    const image = sampleImage
+    const image = props.src
+    // const image = props.src;
+    // const image = 'https://www.hanilelec.co.kr/HanilWebFile/Admin/PRODUCT/(801867)ABFL-1430RDC.jpg'
+    const url = props.url
+    // console.log(`itemBox 렌더링 ${title} ${image}  ${url} ${mode}`)
     let bgColor = '#D9D9D9';
     const [choiced, setChoiced] = useState(false)
     
-    if (choiced === true) {
-        bgColor = "#19ce618c"
-    
-    };
 
     const hadleClick = () =>{
-        setChoiced(!choiced)
+        if (mode === true){
+            getItem({title, image, url})
+            setChoiced(!choiced)
+
+        }
+        
+    
     }
     return(
-        <Container>
+        <Container
+            onClick = {hadleClick}>
             <Wrapper 
             style={{
                 backgroundColor : choiced?  '#19ce618c' : '#D9D9D9' ,
             }}
-            onClick = {
-                hadleClick
-            }
             >
                 <img src={image} alt="상품 이미지" />
             </Wrapper>
             <p>{title}</p>
         </Container>
-        
-
     )
 }
-
 export default ItemBox;

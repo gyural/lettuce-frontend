@@ -1,48 +1,48 @@
 [
-    { "id": 1, 
+    { "id": "1", 
     "productName": "상품 1" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
     "image" : "../images/itemListVirtual"
     },
-    { "id": 2, 
+    { "id": "2", 
     "productName": "상품 2" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
     "image" : "../images/itemListVirtual"
     },
-    { "id": 3, 
+    { "id": "3", 
     "productName": "상품 3" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
-    "image" : "../images/itemListVirtual"
+    "image" : "https://img.appstory.co.kr/@files/monthly.appstory.co.kr/content/202205/a62de81fef6a16df2710617ffb11f457.jpg"
     },
-    { "id": 4, 
+    { "id": "4", 
     "productName": "상품 4" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
-    "image" : "../images/itemListVirtual"
+    "image" : "https://images.samsung.com/kdp/cms_contents/116600/f202117c-b8bd-46bb-a01b-1a3f69576235.jpg?$ORIGIN_JPG$"
     },
-    { "id": 5, 
+    { "id": "5", 
     "productName": "상품 5" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
     "image" : "../images/itemListVirtual"
     },
-    { "id": 6, 
+    { "id": "6", 
     "productName": "상품 6" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
-    "image" : "../images/itemListVirtual"
+    "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIymfIjV_QN_D2fE8q8UnH_5qCX96J0E-Nai5HiCQHygHrPZs_0CXA9kgrOteg7J8nxU&usqp=CAU"
     },
-    { "id": 7, 
+    { "id": "7", 
     "productName": "상품 7" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
     "image" : "../images/itemListVirtual"
     },
-    { "id": 8, 
+    { "id": "8", 
     "productName": "상품 8" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
     "image" : "../images/itemListVirtual"
     },
-    { "id": 9, 
+    { "id": "9", 
     "productName": "상품 9" ,
     "url" : "https://brand.naver.com/fromb/products/4935099989?n_media=11068&n_query=%ED%95%B8%EB%94%94%EC%84%A0%ED%92%8D%EA%B8%B0&n_rank=2&n_ad_group=grp-a001-02-000000033153530&n_ad=nad-a001-02-000000234303953&n_campaign_type=2&n_mall_id=fromb&n_mall_pid=4935099989&n_ad_group_type=2&NaPm=ct%3Dll0gp5x4%7Cci%3D0zm0000hwb1yfd5xBfmA%7Ctr%3Dpla%7Chk%3Dc58ebe3f83517c2b7e27de5e236e6c71a1c6125f",
-    "image" : "../images/itemListVirtual"
+    "image" : "https://cdn.imweb.me/thumbnail/20230508/c03980d6c0722.jpg"
     }
     
 ]

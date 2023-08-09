@@ -4,8 +4,8 @@ import image1 from "../../images/north_west_v2 (1).png"
 
 
 const Wrapper = styled.div`
-    width: 94px;
-    height: 94px;
+    width: 84px;
+    height: 84px;
     padding: 2px;
     display: flex;
     justify-content: center;

@@ -15,16 +15,19 @@ const StyleButton = styled.div`
 function Button(props){
 
 
-    const {title, bgcolor, color, onClick, radius} = props;
-
-    return <StyleButton 
+    const {size, title, bgcolor, color, onClick, radius} = props;
+    return (
+        <StyleButton 
                 style ={{
+                    fontSize : '{1+size}px',
                     backgroundColor : bgcolor,
                     color: color,
                     borderRadius: radius,
                 }}
                 onClick= {onClick}
             >{title || {title}}</StyleButton>
+    )
+            
 }
 
 export default Button;
