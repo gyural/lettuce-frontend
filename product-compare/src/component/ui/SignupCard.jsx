@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import Button from "./Button";
-import image1 from '../../images/btnG_완성형.png';
-import image2 from '../../images/kakao_login_large_wide.png';
-import {useNavigate} from "react-router-dom";
+import kakao_signup from '../../images/kakao_signup.png';
+import naver_signup from '../../images/naver_signup.png';
+
 const Container = styled.div`
     border: 2px solid #19CE60;
     width: 500px;
@@ -37,11 +37,14 @@ const Input = styled.input`
     }
     margin-bottom: 1px;
 `;
-function LoginCard(props){
+
+
+function SignupCard(props){
     const [formData, setFormData]= useState({
         id: '',
         password: '',
-        isChecked: true,
+        check_password: '',
+        email: ''
     })
 
     const handleSubmit = () =>{
@@ -68,8 +71,10 @@ function LoginCard(props){
                 
             }));
         }
+        
+        
+    
     };
-    const navigate = useNavigate();
     return (
         <Container>
             <form>
@@ -87,21 +92,20 @@ function LoginCard(props){
                     value={formData.password}
                     onChange={handleChange}
                 />
-
-                <div 
-                    className="login-state"
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    <input 
-                        type="checkbox"
-                        name="isChecked"
-                        checked={formData.isChecked}
-                        onChange={handleChange}
-                    />
-                    <p>로그인 상태 유지</p>
-                </div>
+                <Input
+                    type="check_password"
+                    name="check_password"
+                    placeholder="비밀번호를 재입력해주세요"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
+                <Input
+                    type="email"
+                    name="email"
+                    placeholder="이메일을 입력해주세요"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
             </form>
             
             
@@ -111,7 +115,7 @@ function LoginCard(props){
                     height: '64px',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'center',
                     gap: '85px',
                     // border: '4px solid red',
                     marginBottom: '8px',
@@ -124,40 +128,26 @@ function LoginCard(props){
                         left: '10px',
                         top: '10px', // 버튼을 아래로 이동시킴
                     }} 
-                    title={" 로그인 "}
+                    title={" 회원가입 "}
                     bgcolor = {'#02C75A'}
                     color = {'#ffffff'}
                     onClick= {handleSubmit}
                     />
                 
-                <Button
-                style={{
-                    marginTop: '20px',
-                    position: 'absolute',
-                    top: '1px',
-                }} 
-                title={"회원가입"}
-                bgcolor = {'#6F6B6B'}
-                color = {'#ffffff'}
-                onClick= {()=>{
-                    // alert('회원가입 버튼 클릭')
-                    navigate('/signup')
-                }}
                 
-                />
             </ButtonWrapper>
             
-            <div className="social-login">
+            <div className="social-signup">
                 
                 
                     <a 
-                    className="kakao-login"
+                    className="kakao-signup"
                     href="javascript:void(0)"
                     style = {{
                         display: 'block',
                         width: '440px',
                         height: '54px',
-                        backgroundImage: `url(${image2})`,
+                        backgroundImage: `url(${kakao_signup})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
@@ -173,8 +163,8 @@ function LoginCard(props){
                         display: 'block',
                         width: '440px',
                         height: '54px',
-                        backgroundImage: `url(${image1})`,
-                        backgroundSize: '340px 60px',
+                        backgroundImage: `url(${naver_signup})`,
+                        // backgroundSize: '340px 60px',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         borderRadius: '25px',
@@ -189,4 +179,4 @@ function LoginCard(props){
 
 }
 
-export default LoginCard;
+export default SignupCard;

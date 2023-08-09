@@ -1,7 +1,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import LoginCard from "../ui/LoginCard";
+import SignupCard from "../ui/SignupCard";
 import logoImage from "../../images/logo.png"
 
 const Header = styled.div`
@@ -34,7 +34,9 @@ const Line = styled.div`
     
 `;
 
-function LoginPage(){
+function SignupPage(){
+
+
 
     return(
         <>
@@ -44,11 +46,11 @@ function LoginPage(){
                 fontSize: '40px',
                 display: 'block',
                 marginLeft: '30px',
-            }}>AI를 통해 상품을 비교하세요</p>
+            }}>회원가입</p>
         </Header>
         <Container>
             <Logo>상추</Logo>
-            <LoginCard />
+            <SignupCard></SignupCard>
             <Line/>
         </Container>
         
@@ -56,4 +58,4 @@ function LoginPage(){
     );
 }
 
-export default LoginPage;
+export default SignupPage;
