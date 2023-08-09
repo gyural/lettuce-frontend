@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "./Button";
 import image1 from '../../images/btnG_완성형.png';
 import image2 from '../../images/kakao_login_large_wide.png';
-
+import {useNavigate} from "react-router-dom";
 const Container = styled.div`
     border: 2px solid #19CE60;
     width: 500px;
@@ -68,10 +68,8 @@ function LoginCard(props){
                 
             }));
         }
-        
-        
-    
     };
+    const navigate = useNavigate();
     return (
         <Container>
             <form>
@@ -142,7 +140,8 @@ function LoginCard(props){
                 bgcolor = {'#6F6B6B'}
                 color = {'#ffffff'}
                 onClick= {()=>{
-                    alert('회원가입 버튼 클릭')
+                    // alert('회원가입 버튼 클릭')
+                    navigate('/signup')
                 }}
                 
                 />

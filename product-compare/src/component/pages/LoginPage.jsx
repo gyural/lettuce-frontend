@@ -36,8 +36,6 @@ const Line = styled.div`
 
 function LoginPage(){
 
-
-
     return(
         <>
         <Header>
