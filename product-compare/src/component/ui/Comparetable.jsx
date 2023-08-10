@@ -39,34 +39,49 @@ function Comparetable(props){
     const handleClick = () => {
         pop()
     }
-    const dateSend = () => {
-        const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/'; // 서버 엔드포인트 주소를 여기에 입력하세요
 
-        var formData = new FormData();
-        
-        // const imgList = ["src1", "src2", "src3"]
-        // const TitleList = ["productName", "produceaasdf", "sdfsd"]
-        
-        formData.append('image', itemList.map((el) =>{
-            return JSON.stringify(el.image)
-        }))
-        formData.append('object_name', itemList.map((el) =>{
-            return JSON.stringify(el.object_name)
-        
-            
-        }));
+    const dateSend = async () => {
+        const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/'; // 서버 엔드포인트 주소를 여기에 입력하세요
         
         
-        axios.post(apiUrl
-            , formData
-            , {
+        var formData = undefined
+        var obj = undefined
+        var obj_list = []
+        formData = new FormData();
+        itemList.map((el) => {
+            formData.append('object_name',  el.object_name);
+            formData.append('image',  el.image);
+        })
+            axios.post(apiUrl
+                , formData
+                , {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            ).catch(err => {
+                alert('등록을 실패하였습니다.');
+            });
+        
+        
+        
+        
+    }
+
+    const dataRecieve = async () => {
+            const URL = "http://127.0.0.1:8000/api/ocr/comparelists/";
+            await axios
+              .get(URL, {
                 headers: {
                     "Content-Type": "multipart/form-data"
+                },
+              })
+              .then((res) => {
+                    console.log('GET 요청')
+                    console.log(res.data)
                 }
-            }
-        ).catch(err => {
-            alert('등록을 실패하였습니다.');
-        });
+              )
+              .catch((e) => {});
     }
     return(
         <Wrapper>
@@ -82,13 +97,16 @@ function Comparetable(props){
                 title = {'비교하기'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
-                onClick = {
-                    // alert('비교하기 창으로 넘어가기!!!')
-                    // post로 넘겨주기
-                    dateSend
+                onClick = {() => {
+                    dateSend()
+                    dataRecieve()
                 }
-                radius = {26}
-                >
+                // alert('비교하기 창으로 넘어가기!!!')
+                // post로 넘겨주기
+                
+            }
+            radius = {26}
+            >
                 </Button>
             </ButtonWrapper>
 

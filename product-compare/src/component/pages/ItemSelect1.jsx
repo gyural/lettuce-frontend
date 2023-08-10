@@ -1,4 +1,4 @@
-import {React, useState, createContext} from "react";
+import {React, useState, createContext, useEffect} from "react";
 import styled from 'styled-components'
 import ItemInput from "../ui/ItemInput";
 import ItemList from "../List/ItemList";
@@ -8,6 +8,9 @@ import logoImage from "../../images/logo.png"
 import ChoiceButton from "../ui/ChoiceButton";
 import itemListVirtual from '../../jsons/itemListVirtual.json'
 import Comparetable from "../ui/Comparetable";
+import { useLocation } from "react-router";
+import axios from 'axios';
+
 
 const itemList = itemListVirtual
 
@@ -53,13 +56,12 @@ const Wrapper = styled.div`
 const CompareWrapper = styled.div`
     
 `
-export const ModeContext = createContext();
 function ItemSelect1 (){
     
     const [choiceMode, setChoiceMode] = useState(false)
     const [selectedItems, setSelectedItems] = useState([])
+    const [items, setItems] = useState([])
     const navigate = useNavigate();
-    
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
         // 해당 itemBox info return
@@ -68,13 +70,47 @@ function ItemSelect1 (){
     };
     // Comparetable의 이전버튼이 눌러졌을때 list를 pop해주는 핸들러 함수
     const handlePop = () => {
-        setSelectedItems(itemList => itemList.slice(0, -1))
+        setSelectedItems(selectedItems => selectedItems.slice(0, -1))
     }
+    // navigate로 넘겨준 props를 console에 찍어주기
+    const Edit = () => {
+        const { state } = useLocation();
+        return state
+    }
+    // 네이버 오픈 API로 itemList에 가져오기
+    const getSearchitem = async (query) => {
+        const URL = "/v1/search/shop.json";
+        // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
+        const ClientID = "UON8xyX_h_yETd2UkLyZ";
+        const ClientSecret = "ZszAjOj5Km";
+        await axios
+          .get(URL, {
+            params: {
+              query: query,
+              display: 20,
+            },
+            headers: {
+              "X-Naver-Client-Id": ClientID,
+              "X-Naver-Client-Secret": ClientSecret,
+            },
+          })
+          .then((res) => {
+            setItems(res.data.items)
+            }
+          )
+          .catch((e) => {});
+    }
+    const query = Edit()
+    //Edit 반환된 query값을 매개변수로 OPEN API 호출
+    useEffect(() => {
+        // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
+        getSearchitem(query);
+      }, []); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행함을 의미
+    
     return(
         <test
             style={{
                 maxHeight: '80px',
-
             }}
         >
         <Header style={{
@@ -105,7 +141,6 @@ function ItemSelect1 (){
             </Wrapper>
             <Wrapper>
                 <Button
-                
                     radius={25}
                     title={" 장바구니 "}
                     bgcolor={'#58B37C'}
@@ -136,7 +171,7 @@ function ItemSelect1 (){
             />
             
             <ItemList
-                itemList = {itemList}
+                items = {items}
                 getItem = {getItem}
                 mode = {choiceMode}
             ></ItemList>

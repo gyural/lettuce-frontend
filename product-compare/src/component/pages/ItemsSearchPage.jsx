@@ -1,9 +1,12 @@
-import React from "react";
+import {React, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components"
 import Button from "../ui/Button";
 import ItemInput from "../ui/ItemInput";
 import logoImage from "../../images/logo.png"
+import axios from 'axios';
+
+
 
 const Container = styled.div`
     background-color: #63DE68;
@@ -52,6 +55,36 @@ const Logo = styled.div`
 `
 function ItemsSearchPage (){
     const navigate = useNavigate();
+    const [value, setValue] = useState('')
+    const [items, setItems] = useState([])
+    const getValue = (inputValue) => {
+        setValue(inputValue)
+    }
+
+    const getSearchitem = async (query) => {
+        const URL = "/v1/search/shop.json";
+        // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
+        const ClientID = "UON8xyX_h_yETd2UkLyZ";
+        const ClientSecret = "ZszAjOj5Km";
+        
+        await axios
+          .get(URL, {
+            params: {
+              query: query,
+              display: 20,
+            },
+            headers: {
+              "X-Naver-Client-Id": ClientID,
+              "X-Naver-Client-Secret": ClientSecret,
+            },
+          })
+          .then((res) => {
+            setItems(res.data.items)
+            }
+          )
+          .catch((e) => {});
+    }
+
 
     return(
         <><Header>
@@ -89,13 +122,9 @@ function ItemsSearchPage (){
                         bgcolor={'#58B37C'}
                         color={'#000000'}
                         onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
-            </ButtonWrapper>
-            
-            
+            </ButtonWrapper>    
             </Header>
             <Container>
-
-
                 <Logo
                 style={{ marginBottom: '0px' }}>
                 <ImageWrapper><img src={logoImage} alt="돋보기" /></ImageWrapper>
@@ -106,8 +135,13 @@ function ItemsSearchPage (){
                 fontSize: '40px',
                 }}>비교하고 싶은 상품을 검색하여 AI로 비교하세요!</p>
                 <ItemInput
-                    onClick ={() =>{
-                        navigate('/select1')
+                    getValue = {getValue}
+                    onClick ={(e) =>{
+                        // navigate('/select1')
+                        navigate('/select1', { state: value });
+                        // console.log(e.target.value)
+                        // getSearchitem(value)
+                        // console.log(html);
                     }}
                 ></ItemInput>
             </Container>

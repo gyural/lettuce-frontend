@@ -12,16 +12,18 @@ const Container = styled.div`
     padding: 10px 0px;
 `;
 function ItemList(props) {
-  const itemList = props.itemList;
+  const itemList = props.items;
+  console.log('List에서의 전달확인!!')
+  console.log(itemList)
   const mode = props.mode
   return (
     <Container>
-      {itemList.map((el) => (
+      {itemList.map((el, index) => (
         <ItemBox
-          key = {el.id}
+          key = {index}
           getItem={props.getItem}
-          title={el.productName}
-          url={el.url}
+          title={el.title}
+          url={el.link}
           src={el.image}
           mode = {mode}
         />

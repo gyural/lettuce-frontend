@@ -1,11 +1,11 @@
 import {React, useState} from "react";
 import styled from "styled-components"
 import searchImage from "../../images/search_image.png"
+
 const Container = styled.div`
     max-width: 1080px; /* 너비를 1350px로 변경 */
     margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
     position: relative;
-    
 `
 const StyledInput = styled.input`
     
@@ -43,11 +43,11 @@ const ImageWrapper = styled.div`
 function ItemInput (props){
     const [itemName, setItemName]= useState('')
     const onClick = props.onClick
-    
+    const getValue = props.getValue
     const handleChange = (e) => {
         const value = e.target.value
         setItemName(value)
-        console.log(itemName);
+        getValue(value)
     }
 
     const handleKeyPress = (e) => {
@@ -61,6 +61,7 @@ function ItemInput (props){
         if (itemName === ''){
             return
         }
+
         onClick()
     }
     return(

@@ -30,10 +30,7 @@ function ItemBox(props){
     const getItem = props.getItem
     const object_name = props.title;
     const image = props.src
-    // const image = props.src;
-    // const image = 'https://www.hanilelec.co.kr/HanilWebFile/Admin/PRODUCT/(801867)ABFL-1430RDC.jpg'
     const url = props.url
-    // console.log(`itemBox 렌더링 ${title} ${image}  ${url} ${mode}`)
     let bgColor = '#D9D9D9';
     const [choiced, setChoiced] = useState(false)
     
