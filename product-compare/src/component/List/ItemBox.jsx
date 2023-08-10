@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 function ItemBox(props){
     const mode = props.mode
     const getItem = props.getItem
-    const title = props.title;
+    const object_name = props.title;
     const image = props.src
     // const image = props.src;
     // const image = 'https://www.hanilelec.co.kr/HanilWebFile/Admin/PRODUCT/(801867)ABFL-1430RDC.jpg'
@@ -40,7 +40,7 @@ function ItemBox(props){
 
     const hadleClick = () =>{
         if (mode === true){
-            getItem({title, image, url})
+            getItem({image, object_name})
             setChoiced(!choiced)
 
         }
@@ -57,7 +57,7 @@ function ItemBox(props){
             >
                 <img src={image} alt="상품 이미지" />
             </Wrapper>
-            <p>{title}</p>
+            <p>{object_name}</p>
         </Container>
     )
 }
