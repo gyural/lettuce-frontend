@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 function ItemList(props) {
   const itemList = props.items;
-  console.log('List에서의 전달확인!!')
   console.log(itemList)
   const mode = props.mode
   return (
@@ -21,11 +20,13 @@ function ItemList(props) {
       {itemList.map((el, index) => (
         <ItemBox
           key = {index}
+          title = {el.title}
           getItem={props.getItem}
-          title={el.title}
-          url={el.link}
-          src={el.image}
+          image={el.image}
+          productId={el.productId}
           mode = {mode}
+          itemURL = {el.link}
+
         />
       ))}
     </Container>
