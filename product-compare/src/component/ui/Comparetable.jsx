@@ -4,7 +4,7 @@ import Button from "./Button";
 import ItemBox from "../List/ItemBox";
 import axios from 'axios';
 const Wrapper = styled.div`
-    width: 1920px;
+    width: 100%;
     height: 260px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
@@ -18,18 +18,23 @@ const Wrapper = styled.div`
 `;
 
 const ItemContainer = styled.div`
-    max-width: 1200px;
+    max-width: 100%;
+    width: 100%;
     height: 240px;
     display:flex;
     justify-content: flex-start;
     gap: 4px;
     align-items: center;
-    overflow: scroll;
+    overflow: auto;
     
 `
 
 const ButtonWrapper = styled.div`
     
+`
+
+const CompareResult = styled.div`
+    width: 100%;
 `
 
 function Comparetable(props){

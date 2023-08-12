@@ -7,12 +7,12 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
-`
-const Wrapper = styled.div`
     width: 200px;
     height: 200px;
+`
+const Wrapper = styled.div`
+    width: 180px;
+    height: 180px;
     padding: 3px 2px;
     overflow: hidden;
     display: flex;
@@ -35,7 +35,7 @@ function ItemBox(props){
     const [choiced, setChoiced] = useState(false)
     
 
-    const hadleClick = () =>{
+    const handleClick = () =>{
         if (mode === true){
             getItem({image, object_name})
             setChoiced(!choiced)
@@ -46,7 +46,7 @@ function ItemBox(props){
     }
     return(
         <Container
-            onClick = {hadleClick}>
+            onClick = {handleClick}>
             <Wrapper 
             style={{
                 backgroundColor : choiced?  '#19ce618c' : '#D9D9D9' ,

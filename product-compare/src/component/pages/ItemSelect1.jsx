@@ -15,7 +15,7 @@ import axios from 'axios';
 const itemList = itemListVirtual
 
 const Container = styled.div`
-    width: 100%;
+    width: auto;
     padding: 80px 40px;
     position: relative;
     display: flex;
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
 `
 
 const CompareWrapper = styled.div`
-    
+    width: 100%;
 `
 function ItemSelect1 (){
     
