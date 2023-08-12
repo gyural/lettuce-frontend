@@ -65,7 +65,14 @@ function ItemSelect1 (){
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
         // 해당 itemBox info return
-        setSelectedItems(selectedItems => [...selectedItems, itemInfo])
+        const index = selectedItems.findIndex((el) => el.object_name === itemInfo.object_name);
+        if(index === -1){
+            setSelectedItems(selectedItems => [...selectedItems, itemInfo]);
+        }
+        else{
+            // 이미 선택된 아이템이라면 선택 해제
+            setSelectedItems(selectedItems => [...selectedItems.slice(0, index), ...selectedItems.slice(index + 1)]);
+        }
         
     };
     // Comparetable의 이전버튼이 눌러졌을때 list를 pop해주는 핸들러 함수
