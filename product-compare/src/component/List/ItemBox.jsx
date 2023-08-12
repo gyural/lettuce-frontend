@@ -24,6 +24,11 @@ const Wrapper = styled.div`
     max-height: 100%;
   }
 `
+const ItemName = styled.a`
+    text-decoration-line: none;
+    color: black;
+    
+`
 
 function ItemBox(props){
     const mode = props.mode
@@ -54,7 +59,7 @@ function ItemBox(props){
             >
                 <img src={image} alt="상품 이미지" />
             </Wrapper>
-            <p dangerouslySetInnerHTML={{ __html: object_name }}></p>
+            <ItemName href={url} dangerouslySetInnerHTML={{ __html: object_name }}></ItemName>
         </Container>
     )
 }
