@@ -57,7 +57,10 @@ const CompareWrapper = styled.div`
     width: 100%;
 `
 function ItemSelect1 (){
-    
+    const [value, setValue] = useState('')
+    const getValue = (inputValue) => {
+        setValue(inputValue)
+    }
     const [choiceMode, setChoiceMode] = useState(false)
     const [selectedItems, setSelectedItems] = useState([])
     const [items, setItems] = useState([])
@@ -108,6 +111,7 @@ function ItemSelect1 (){
           .catch((e) => {});
     }
     const query = Edit()
+    // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
     //Edit 반환된 query값을 매개변수로 OPEN API 호출
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
@@ -173,8 +177,9 @@ function ItemSelect1 (){
             }}>
             <ItemInput
                 onClick = {() =>{ 
-                    navigate('/select1')
+                    getSearchitem(value);
                 }}
+                getValue = {getValue}
             />
             
             <ItemList
@@ -210,6 +215,9 @@ function ItemSelect1 (){
                 list = {selectedItems}
                 mode = {choiceMode}
                 pop = {handlePop}
+                showResult = {(result) => {
+                    
+                }}
             />
         </CompareWrapper>}
         
