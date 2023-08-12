@@ -54,7 +54,7 @@ function ItemBox(props){
             >
                 <img src={image} alt="상품 이미지" />
             </Wrapper>
-            <p>{object_name}</p>
+            <p dangerouslySetInnerHTML={{ __html: object_name }}></p>
         </Container>
     )
 }
