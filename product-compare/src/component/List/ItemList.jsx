@@ -9,7 +9,9 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 10px 0px;
+    padding: 0px 0px;
+    column-gap: 10px;
+    row-gap: 10px;
 `;
 function ItemList(props) {
   const itemList = props.items;
