@@ -15,18 +15,28 @@ async function parsingItemSpec(baseURL) {
                 const specImageHtml = jsonData.props.pageProps.initialState.catalog.specInfo.catalogSpec.catalogSpecContent;
                 const $specImage = cheerio.load(specImageHtml);
                 const imageUrl = $specImage('img').attr('src');
-                return imageUrl;
+
+                if (imageUrl) {
+                    return Promise.resolve(imageUrl); // 이미지 URL을 Promise로 감싸서 반환
+                } else {
+                    return Promise.resolve('undefined');
+                }
             } catch (error) {
-                return 'undefined';
+                return Promise.resolve('undefined');
             }
         } else {
             console.log('No data found.');
-            return -1;
+            return Promise.resolve(-1);
         }
     } catch (error) {
         console.error('Error fetching product detail data:', error);
-        return -1;
+        return Promise.resolve(-1);
     }
 }
 
 export default parsingItemSpec;
+
+
+
+
+

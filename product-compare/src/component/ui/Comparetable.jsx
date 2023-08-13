@@ -60,7 +60,8 @@ function Comparetable(props){
                 object_url: []
             };
     
-            for (const item of itemList) {
+            // 이미지를 가져오는 Promise 배열 생성
+            const imagePromises = itemList.map(async (item) => {
                 const resolvedItem = await item;
                 objFormat.object_name.push(resolvedItem.object_name);
                 objFormat.object_url.push(resolvedItem.object_url);
@@ -68,7 +69,10 @@ function Comparetable(props){
     
                 const objectName = `obj${objFormat.object_name.length}`;
                 objFormat.images[objectName] = resolvedItem.images;
-            }
+            });
+    
+            // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
+            await Promise.all(imagePromises);
     
             const jsonData = JSON.stringify(objFormat);
             console.log(jsonData);
@@ -120,7 +124,6 @@ function Comparetable(props){
                 color = '#000000'
                 onClick = {() => {
                     dateSend()
-                    dataRecieve()
                 }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
@@ -155,10 +158,10 @@ function Comparetable(props){
                 <ItemBox
                 key = {index}
                 getItem={() =>{}}
-                title={el.title}
+                title={el.object_name}
                 url={el.url}
                 mode = {mode}
-                image={el.image}
+                image={el.thumbnail}
                 productId={el.productId}
                 />
                 ))}
