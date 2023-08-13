@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 
 async function parsingItemSpec(baseURL) {
     try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(baseURL, { headers: { 'User-Agent': '저 사람입니다ㅠㅠㅠ' } });
         const html = response.data;
         const $ = cheerio.load(html);
 

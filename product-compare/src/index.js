@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import CompareLog from './component/List/CompareLog';
+import CompareLogList from './component/List/CompareLogList';
+import CompareLogPage from './component/pages/CompareLogPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

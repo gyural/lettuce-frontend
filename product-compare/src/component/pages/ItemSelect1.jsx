@@ -166,7 +166,7 @@ function ItemSelect1 (){
                     title={" My비교 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
-                    onClick={() => { console.log('My비교 버튼 클릭!!!'); } } />
+                    onClick={() => { navigate("/mylog")} } />
             </Wrapper>
             
 
