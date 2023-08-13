@@ -38,7 +38,6 @@ const ImageWrapper = styled.div`
     right: -2px;
     bottom: 0;
     position: absolute;
-    z-index: 1;
 `
 function ItemInput (props){
     const [itemName, setItemName]= useState('')

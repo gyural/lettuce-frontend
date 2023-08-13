@@ -8,6 +8,7 @@ import logoImage from "../../images/logo.png"
 import ChoiceButton from "../ui/ChoiceButton";
 import itemListVirtual from '../../jsons/itemListVirtual.json'
 import Comparetable from "../ui/Comparetable";
+import ResultCard from "../ui/ResultCard";
 import { useLocation } from "react-router";
 import axios from 'axios';
 
@@ -16,7 +17,7 @@ const itemList = itemListVirtual
 
 const Container = styled.div`
     width: auto;
-    padding: 80px 40px;
+    padding: 20px 40px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -64,6 +65,9 @@ function ItemSelect1 (){
     const [choiceMode, setChoiceMode] = useState(false)
     const [selectedItems, setSelectedItems] = useState([])
     const [items, setItems] = useState([])
+    const [resultMode, setResult] = useState(false)
+    const [isResultUp, setIsResultUp] = useState(false);
+
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
@@ -203,7 +207,6 @@ function ItemSelect1 (){
             >
                 <ChoiceButton
                 ></ChoiceButton>
-                <p>상품 선택</p>
             </Wrapper>
             
         </Container>
@@ -216,12 +219,12 @@ function ItemSelect1 (){
                 mode = {choiceMode}
                 pop = {handlePop}
                 showResult = {(result) => {
-                    
+                    setResult(true)
+                    setIsResultUp(false)
                 }}
             />
         </CompareWrapper>}
-        
-
+        {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} />}
         </test>
         
     )

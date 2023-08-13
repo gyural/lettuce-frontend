@@ -4,12 +4,12 @@ import Button from "./Button";
 import ItemBox from "../List/ItemBox";
 import axios from 'axios';
 const Wrapper = styled.div`
-    width: 100%;
-    height: 260px;
+    width: auto;
+    height: 210px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-    border: 2px solid #3b3939;
+    border: 2px solid #d8e0a5;
     padding: 10px 180px;
     display:flex;
     justify-content: flex-start;
@@ -18,14 +18,19 @@ const Wrapper = styled.div`
 `;
 
 const ItemContainer = styled.div`
-    max-width: 100%;
-    width: 100%;
-    height: 240px;
+    width: auto;
+    height: 100%;
     display:flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 4px;
     align-items: center;
-    overflow: auto;
+    scroll-behavior:smooth;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    /* &::-webkit-scrollbar{
+        // 가로 스크롤바 숨기기
+    display: none; 
+    } */
     
 `
 
@@ -34,17 +39,21 @@ const ButtonWrapper = styled.div`
 `
 
 const CompareResult = styled.div`
-    width: 100%;
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    height: 600px;
+    background-color: #FAFDE7;
 `
 
 function Comparetable(props){
     const itemList = props.list
     const mode = props.mode
     const pop = props.pop
+    const showResult = props.showResult
     const handleClick = () => {
         pop()
     }
-
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/'; // 서버 엔드포인트 주소를 여기에 입력하세요
         
@@ -57,16 +66,16 @@ function Comparetable(props){
             formData.append('object_name',  el.object_name);
             formData.append('image',  el.image);
         })
-            axios.post(apiUrl
-                , formData
-                , {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
+        axios.post(apiUrl
+            , formData
+            , {
+                headers: {
+                    "Content-Type": "multipart/form-data"
                 }
-            ).catch(err => {
-                alert('등록을 실패하였습니다.');
-            });
+            }
+        ).catch(err => {
+            alert('등록을 실패하였습니다.');
+        });
         
         
         
@@ -103,8 +112,9 @@ function Comparetable(props){
                 bgcolor = '#8FDEA5'
                 color = '#000000'
                 onClick = {() => {
-                    dateSend()
-                    dataRecieve()
+                    // dateSend()
+                    // dataRecieve()
+                    showResult()
                 }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
@@ -122,14 +132,14 @@ function Comparetable(props){
                     left: '20px'
                 }}
                 >
-                <Button
+                {/* <Button
                 title = {'이전'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
                 onClick = {handleClick}
                 radius = {26}
                 >
-                </Button>
+                </Button> */}
             </ButtonWrapper>
             
             <ItemContainer>
