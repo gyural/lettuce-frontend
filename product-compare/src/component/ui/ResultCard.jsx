@@ -24,13 +24,15 @@ const slideDown = keyframes`
 
 
 const Card = styled.div`
-    position: fixed;
-    top: 20%;
+    position: absolute;
+    top: 0%;
     width: 100%;
-    height: 80%;
-    background-color: #FAFDE7;
-    animation: ${props => (props.move ? css`${slideDown} 0.5s ease-in-out`:css`${slideUp} 0.5s ease-in-out`)};
-    animation-fill-mode: forwards;
+    height: 100%;
+    /* background-color: #FAFDE7; */
+    background: rgba(250, 253, 230, 0.85);
+    backdrop-filter: blur(15px);
+    /* box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2); */
+
 `
 const Title = styled.div`
     box-sizing: border-box;
@@ -70,6 +72,18 @@ const Container = styled.div`
     }
 `
 
+const Wrapper = styled.div`
+    position: fixed;
+    top: 20%;
+    width: 100%;
+    height: 80%;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    animation: ${props => (props.move ? css`${slideDown} 0.5s ease-in-out`:css`${slideUp} 0.5s ease-in-out`)};
+    animation-fill-mode: forwards;
+    box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2);
+`
+
 function ResultCard(props){
     const weight = props.weight;
     const isUp = props.isUp;
@@ -79,16 +93,19 @@ function ResultCard(props){
     const onButtonClick = props.onButtonClick;
     
     return(
-        <Card move={isUp}>
+        <Wrapper move={isUp}>
             <SlideButton onClick={()=>{
-                onButtonClick(!isUp)
-                }}/>
-            <Container>
-                <Title >비교결과</Title>
-                <p>총 {item.length}개의 상품을 비교했습니다.</p>
-                <p>{result}</p>
-            </Container>
-        </Card>
+                    onButtonClick(!isUp)
+                    }}/>
+            <Card>
+                
+                <Container>
+                    <Title >비교결과</Title>
+                    <p>총 {item.length}개의 상품을 비교했습니다.</p>
+                    <p>{result}</p>
+                </Container>
+            </Card>
+        </Wrapper>
     );
 }
 

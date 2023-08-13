@@ -10,7 +10,13 @@ const Button = styled.div`
     width: 130px;
     height: 50px;
     border-radius: 20px;
-    background: #FAFDE6;
+    /* border: 3px solid #d9dfbb; */
+    /* background: #fafde6; */
+    background: rgba(250, 253, 230, 0.85);
+    backdrop-filter: blur(15px);
+    box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2);
+
+
     cursor: pointer;
     p {
         position: absolute;
