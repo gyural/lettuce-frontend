@@ -1,0 +1,51 @@
+[
+    {
+        "id": 4,
+        "objs": [
+            {
+                "object_name": "test_json1",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "http://127.0.0.1:8000/test_img1.jpg",
+                "object_url": "https://www.example.url1.com"
+            }
+        ],
+        "result": [
+            {
+                "selected_object_name": "undefined",
+                "selected_object_url": "undefined"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "objs": [
+            {
+                "object_name": "test_json1",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "http://127.0.0.1:8000/test_img1.jpg",
+                "object_url": "https://www.example.url1.com"
+            },
+            {
+                "object_name": "test_json2",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "http://127.0.0.1:8000/test_img2.jpg",
+                "object_url": "https://www.example.url1.com"
+            }
+        ],
+        "result": [
+            {
+                "selected_object_name": "undefined",
+                "selected_object_url": "undefined"
+            }
+        ]
+    }
+]

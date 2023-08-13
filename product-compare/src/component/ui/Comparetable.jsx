@@ -46,9 +46,9 @@ function Comparetable(props){
     }
 
     // 상품상세 URL을 만들어주는 함수
-    const getDetailURL = (productID) => {
-        return 'https://search.shopping.naver.com/catalog/' + encodeURIComponent(productID) + '?' + encodeURIComponent(query)
-    }
+    // const getDetailURL = (productID) => {
+    //     return 'https://search.shopping.naver.com/catalog/' + encodeURIComponent(productID) + '?' + encodeURIComponent(query)
+    // }
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/';
     
@@ -124,6 +124,8 @@ function Comparetable(props){
                 color = '#000000'
                 onClick = {() => {
                     dateSend()
+
+                    dataRecieve()
                 }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
