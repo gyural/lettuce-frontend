@@ -125,7 +125,7 @@ function Comparetable(props){
                 onClick = {() => {
                     dateSend()
 
-                    dataRecieve()
+                    // dataRecieve()
                 }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기

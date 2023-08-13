@@ -46,7 +46,8 @@ function ItemBox(props){
     const baseURL = 'https://search.shopping.naver.com/catalog/'
     // https://search.shopping.naver.com/catalog/34952301619
     const object_url = 'https://search.shopping.naver.com/catalog/' + productId
-    const detailURL =  parsingItemSpec(object_url)
+    // const detailURL =  parsingItemSpec(object_url) => 네이버에서 block되어서 임시 url 전송
+    const detailURL = object_url
     const images = []
     images.push(detailURL)
     
@@ -55,8 +56,6 @@ function ItemBox(props){
     // https://search.shopping.naver.com/catalog/37624157618
     
     const hadleClick = () =>{
-        
-
         if (mode === true){
             getItem({object_name, images, thumbnail, object_url })
             setChoiced(!choiced)

@@ -3,19 +3,59 @@
         "id": 4,
         "objs": [
             {
-                "object_name": "test_json1",
+                "object_name": "베이직스 베이직북S BB1022FW",
                 "images": [
                     "https://www.example.com",
                     "https://www.example.com"
                 ],
-                "thumbnail": "http://127.0.0.1:8000/test_img1.jpg",
-                "object_url": "https://www.example.url1.com"
+                "thumbnail": "https://shopping-phinf.pstatic.net/main_3945190/39451903619.20230419102455.jpg",
+                "object_url": "https://search.shopping.naver.com/gate.nhn?id=39451903619"
+            },
+
+            {
+                "object_name": "갤럭시북2 프로",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "https://shopping-phinf.pstatic.net/main_3131967/31319676618.20221216110615.jpg",
+                "object_url": "https://search.shopping.naver.com/gate.nhn?id=31319676618"
+            },
+
+            {
+                "object_name": "LG전자 그램16 16ZD90P-GX50K",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "https://shopping-phinf.pstatic.net/main_2525596/25255963522.20201224164146.jpg",
+                "object_url": "https://search.shopping.naver.com/gate.nhn?id=25255963522"
+            },
+
+            {
+                "object_name": "갤럭시북2 프로",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "https://shopping-phinf.pstatic.net/main_3131967/31319676618.20221216110615.jpg",
+                "object_url": "https://search.shopping.naver.com/gate.nhn?id=31319676618"
+            },
+
+            {
+                "object_name": "갤럭시북2 프로",
+                "images": [
+                    "https://www.example.com",
+                    "https://www.example.com"
+                ],
+                "thumbnail": "https://shopping-phinf.pstatic.net/main_3131967/31319676618.20221216110615.jpg",
+                "object_url": "https://search.shopping.naver.com/gate.nhn?id=31319676618"
             }
         ],
         "result": [
             {
-                "selected_object_name": "undefined",
-                "selected_object_url": "undefined"
+                "selected_object_name": "결과 제목!!",
+                "selected_object_url": "https://shopping-phinf.pstatic.net/main_3131967/31319676618.20221216110615.jpg"
             }
         ]
     },
@@ -43,8 +83,8 @@
         ],
         "result": [
             {
-                "selected_object_name": "undefined",
-                "selected_object_url": "undefined"
+                "selected_object_name": "결과 제목!!",
+                "selected_object_url": "https://shopping-phinf.pstatic.net/main_3131967/31319676618.20221216110615.jpg"
             }
         ]
     }
