@@ -51,63 +51,45 @@ function Comparetable(props){
     // }
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/';
-    
-        try {
-            const objFormat = {
-                images: {}, // 이미지 데이터를 객체 형태로 저장
-                object_name: [],
-                thumbnail: [],
-                object_url: []
-            };
-    
-            // 이미지를 가져오는 Promise 배열 생성
-            const imagePromises = itemList.map(async (item) => {
-                const resolvedItem = await item;
-                objFormat.object_name.push(resolvedItem.object_name);
-                objFormat.object_url.push(resolvedItem.object_url);
-                objFormat.thumbnail.push(resolvedItem.thumbnail);
-    
-                const objectName = `obj${objFormat.object_name.length}`;
-                objFormat.images[objectName] = resolvedItem.images;
-            });
-    
-            // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
-            await Promise.all(imagePromises);
-    
-            const jsonData = JSON.stringify(objFormat);
-            console.log(jsonData);
-    
-            const response = await axios.post(
-                apiUrl,
-                jsonData,
-                {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-    
-            console.log(response.data);
-        } catch (err) {
-            alert('등록을 실패하였습니다.');
-        }
-    };
+        
+        console.log('넘어온 itemList형태 확인!!!')
+        
+        
+        const objFormat = {
+            images: {}, // 이미지 데이터를 객체 형태로 저장
+            object_name: [],
+            thumbnail: [],
+            object_url: []
+        };
 
-    const dataRecieve = async () => {
-            const URL = "http://127.0.0.1:8000/api/ocr/comparelists/";
-            await axios
-              .get(URL, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
-              })
-              .then((res) => {
-                    console.log('GET 요청')
-                    console.log(res.data)
-                }
-              )
-              .catch((e) => {});
-    }
+        // 이미지를 가져오는 Promise 배열 생성
+        itemList.forEach((element, idx) => {
+            objFormat.object_name.push(element.object_name);
+            objFormat.object_url.push(element.object_url);
+            objFormat.thumbnail.push(element.thumbnail);
+            const objName = `obj${idx}`;
+            objFormat.images[objName] = element.detail_url;
+        });
+           
+
+        // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
+
+        const jsonData = JSON.stringify(objFormat);
+        console.log(jsonData)
+        const response = await axios.post(
+            apiUrl,
+            jsonData,
+            {
+            headers: {
+                "Content-Type": "application/json" // 올바른 Content-Type 설정
+            }
+            }
+        );
+            
+            
+        };
+
+    
     return(
         <Wrapper>
             <ButtonWrapper

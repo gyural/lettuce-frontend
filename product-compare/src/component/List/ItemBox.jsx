@@ -1,7 +1,8 @@
-import {React, useState, useContext} from "react";
+import {React, useState, useEffect} from "react";
 import styled from 'styled-components';
 import parsingItemSpec from "../../APIs/ParsingItemSpec";
 import ParsingItemURL from "../../APIs/ParsingItemURL";
+import axios from "axios";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -31,35 +32,30 @@ function removeHtmlTags(input) {
 function ItemBox(props){
     const mode = props.mode
     const getItem = props.getItem
-    const object_name = props.title;
+    const object_name = removeHtmlTags(props.title);
     const thumbnail = props.image
-    const productId = props.productId
-    const productGateURL = props.itemURL 
-    function removeQueryString(url) {
-        const index = url.indexOf('?');
-        if (index !== -1) {
-            return url.substring(0, index);
-        }
-        return url;
-    }
-
-    const baseURL = 'https://search.shopping.naver.com/catalog/'
-    // https://search.shopping.naver.com/catalog/34952301619
-    const object_url = 'https://search.shopping.naver.com/catalog/' + productId
-    // const detailURL =  parsingItemSpec(object_url) => 네이버에서 block되어서 임시 url 전송
-    const detailURL = object_url
-    const images = []
-    images.push(detailURL)
-    
-    let bgColor = '#D9D9D9';
+    const object_url = props.itemURL
+    const detail_url = [] 
+    // function removeQueryString(url) {
+    //     const index = url.indexOf('?');
+    //     if (index !== -1) {
+    //         return url.substring(0, index);
+    //     }
+    //     return url;
+    // }
     const [choiced, setChoiced] = useState(false)
     // https://search.shopping.naver.com/catalog/37624157618
     
     const hadleClick = () =>{
         if (mode === true){
-            getItem({object_name, images, thumbnail, object_url })
             setChoiced(!choiced)
-
+            const URL = object_url;
+            axios
+            .get(URL)
+            .then((res) => {
+                detail_url.push(parsingItemSpec(res.data)); // 상태 업데이트
+            });
+            getItem({object_name, detail_url, thumbnail, object_url })
         }
         
     

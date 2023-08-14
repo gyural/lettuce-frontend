@@ -1,32 +1,31 @@
 import axios from "axios";
 const cheerio = require('cheerio')
 
-async function parsingItemSpec(baseURL) {
-    try {
-        const response = await axios.get(baseURL, { headers: { 'User-Agent': '저 사람입니다ㅠㅠㅠ' } });
-        const html = response.data;
-        const $ = cheerio.load(html);
-
-        const nextDataScript = $('script#__NEXT_DATA__').html();
-        if (nextDataScript) {
-            const jsonData = JSON.parse(nextDataScript);
-
-            try {
-                const specImageHtml = jsonData.props.pageProps.initialState.catalog.specInfo.catalogSpec.catalogSpecContent;
-                const $specImage = cheerio.load(specImageHtml);
-                const imageUrl = $specImage('img').attr('src');
-                return imageUrl;
-            } catch (error) {
-                return 'undefined';
-            }
-        } else {
-            console.log('No data found.');
-            return -1;
+function parsingItemSpec(html) {
+    if (html) {
+      const $ = cheerio.load(html);
+      const nextDataScript = $('script#__NEXT_DATA__').html();
+      
+      if (nextDataScript) {
+        try {
+          const jsonData = JSON.parse(nextDataScript);
+          const specImageHtml = jsonData.props.pageProps.initialState.catalog.specInfo.catalogSpec.catalogSpecContent;
+          
+          if (specImageHtml) {
+            const $specImage = cheerio.load(specImageHtml);
+            const imageUrl = $specImage('img').attr('src');
+            return imageUrl;
+          } else {
+            return -1; // specImageHtml이 없을 경우 예외 처리
+          }
+        } catch (error) {
+          console.error("Error parsing JSON data:", error);
+          return -1; // JSON 파싱 오류 예외 처리
         }
-    } catch (error) {
-        console.error('Error fetching product detail data:', error);
-        return -1;
+      }
     }
-}
+    
+    return -1; // html이 없을 경우 예외 처리
+  }
 
 export default parsingItemSpec;

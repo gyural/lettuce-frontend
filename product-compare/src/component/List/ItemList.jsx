@@ -14,7 +14,9 @@ function ItemList(props) {
     flex-wrap: wrap;
     padding: 10px 0px;
   `;
-
+  const getItemURL = ((productId) =>{
+    return ('https://search.shopping.naver.com/catalog/' + productId)
+  })
   const itemList = props.items;
   const mode = props.mode
   return (
@@ -27,7 +29,7 @@ function ItemList(props) {
           image={el.image || el.thumbnail}
           productId={el.productId}
           mode = {mode}
-          itemURL = {el.link}
+          itemURL = {getItemURL(el.productId)}
 
         />
       ))}
