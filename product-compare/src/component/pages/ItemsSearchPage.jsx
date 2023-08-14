@@ -4,7 +4,6 @@ import styled from "styled-components"
 import Button from "../ui/Button";
 import ItemInput from "../ui/ItemInput";
 import logoImage from "../../images/logo.png"
-import axios from 'axios';
 
 
 
@@ -56,35 +55,9 @@ const Logo = styled.div`
 function ItemsSearchPage (){
     const navigate = useNavigate();
     const [value, setValue] = useState('')
-    const [items, setItems] = useState([])
     const getValue = (inputValue) => {
         setValue(inputValue)
     }
-
-    const getSearchitem = async (query) => {
-        const URL = "/v1/search/shop.json";
-        // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
-        const ClientID = "UON8xyX_h_yETd2UkLyZ";
-        const ClientSecret = "ZszAjOj5Km";
-        
-        await axios
-          .get(URL, {
-            params: {
-              query: query,
-              display: 20,
-            },
-            headers: {
-              "X-Naver-Client-Id": ClientID,
-              "X-Naver-Client-Secret": ClientSecret,
-            },
-          })
-          .then((res) => {
-            setItems(res.data.items)
-            }
-          )
-          .catch((e) => {});
-    }
-
 
     return(
         <><Header>
@@ -110,7 +83,7 @@ function ItemsSearchPage (){
                         title={" 장바구니 "}
                         bgcolor={'#58B37C'}
                         color={'#000000'}
-                        onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
+                        onClick={() => { console.log('장바구니 버튼 클릭!!!'); } } />
             </ButtonWrapper>
             <ButtonWrapper>
                 <Button
@@ -121,7 +94,7 @@ function ItemsSearchPage (){
                         title={" My비교 "}
                         bgcolor={'#58B37C'}
                         color={'#000000'}
-                        onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
+                        onClick={() => { console.log('My비교 버튼 클릭!!!'); } } />
             </ButtonWrapper>    
             </Header>
             <Container>
@@ -137,11 +110,7 @@ function ItemsSearchPage (){
                 <ItemInput
                     getValue = {getValue}
                     onClick ={(e) =>{
-                        // navigate('/select1')
                         navigate('/select1', { state: value });
-                        // console.log(e.target.value)
-                        // getSearchitem(value)
-                        // console.log(html);
                     }}
                 ></ItemInput>
             </Container>

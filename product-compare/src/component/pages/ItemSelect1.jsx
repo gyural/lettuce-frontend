@@ -93,7 +93,7 @@ function ItemSelect1 (){
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
-        const URL = "/v1/search/shop.json";
+        const URL = "v1/search/shop.json";
         // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
         const ClientID = "UON8xyX_h_yETd2UkLyZ";
         const ClientSecret = "ZszAjOj5Km";
@@ -101,7 +101,7 @@ function ItemSelect1 (){
           .get(URL, {
             params: {
               query: query,
-              display: 20,
+              display: 100,
             },
             headers: {
               "X-Naver-Client-Id": ClientID,
@@ -109,25 +109,36 @@ function ItemSelect1 (){
             },
           })
           .then((res) => {
-            setItems(res.data.items)
+              const filteredItems = filteringSmartStore(res.data.items)
+              console.log('필터링된 아이템 목록들!!!')
+              console.log(filteredItems)
+              setItems(filteredItems)
             }
           )
           .catch((e) => {});
     }
+    // 목록들중 비스마트 스토어들만 필터링 해주는 코드
+    const filteringSmartStore = (noneFilteredList) =>{
+        const filteredList = []
+        for (let item of noneFilteredList){
+
+            if(item.mallName === '네이버'){
+                 filteredList.push(item) 
+            } 
+        }
+        return filteredList;
+    }
+        
+    
+    // url만 넘겨주면 된다!!!
     const query = Edit()
-    // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
-    //Edit 반환된 query값을 매개변수로 OPEN API 호출
+    //Edit 반환된 query값을 매개변수로 OPEN API 호출 마운트시에만 실행하기!!
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
         getSearchitem(query);
       }, []); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행함을 의미
-    
     return(
-        <test
-            style={{
-                maxHeight: '80px',
-            }}
-        >
+        <>
         <Header style={{
             position: 'relative',
             }}>
@@ -160,7 +171,7 @@ function ItemSelect1 (){
                     title={" 장바구니 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
-                    onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
+                    onClick={() => { alert('장바구니 버튼 클릭!!!'); } } />
             </Wrapper>
             <Wrapper>
                 <Button
@@ -169,7 +180,7 @@ function ItemSelect1 (){
                     title={" My비교 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
-                    onClick={() => { console.log('로그인 버튼 클릭!!!'); } } />
+                    onClick={() => { navigate("/mylog")} } />
             </Wrapper>
             
 
@@ -202,7 +213,6 @@ function ItemSelect1 (){
                 }}
                 onClick = {() =>{
                     setChoiceMode(!choiceMode);
-                    console.log('선택 버튼 클릭 이벤트 발생!!')
                 }}
             >
                 <ChoiceButton
@@ -218,6 +228,7 @@ function ItemSelect1 (){
                 list = {selectedItems}
                 mode = {choiceMode}
                 pop = {handlePop}
+                query = {query}
                 showResult = {(result) => {
                     setResult(true)
                     setIsResultUp(false)
@@ -226,6 +237,7 @@ function ItemSelect1 (){
         </CompareWrapper>}
         {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} />}
         </test>
+
         
     )
 }

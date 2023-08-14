@@ -1,7 +1,8 @@
-import {React, useState, useContext} from "react";
+import {React, useState, useEffect} from "react";
 import styled from 'styled-components';
-import { ModeContext } from "../pages/ItemSelect1";
-
+import parsingItemSpec from "../../APIs/ParsingItemSpec";
+import ParsingItemURL from "../../APIs/ParsingItemURL";
+import axios from "axios";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,27 +25,39 @@ const Wrapper = styled.div`
     max-height: 100%;
   }
 `
-const ItemName = styled.a`
-    text-decoration-line: none;
-    color: black;
-    
-`
 
+// 문자열에서 HTML 태그를 제거하는 함수
+function removeHtmlTags(input) {
+    return input.replace(/<\/?[^>]+(>|$)/g, "");
+}
 function ItemBox(props){
     const mode = props.mode
     const getItem = props.getItem
-    const object_name = props.title;
-    const image = props.src
-    const url = props.url
-    let bgColor = '#D9D9D9';
+    const object_name = removeHtmlTags(props.title);
+    const thumbnail = props.image
+    const object_url = props.itemURL
+    const detail_url = [] 
+    // function removeQueryString(url) {
+    //     const index = url.indexOf('?');
+    //     if (index !== -1) {
+    //         return url.substring(0, index);
+    //     }
+    //     return url;
+    // }
     const [choiced, setChoiced] = useState(false)
+    // https://search.shopping.naver.com/catalog/37624157618
     
 
     const handleClick = () =>{
         if (mode === true){
-            getItem({image, object_name})
             setChoiced(!choiced)
-
+            const URL = object_url;
+            axios
+            .get(URL)
+            .then((res) => {
+                detail_url.push(parsingItemSpec(res.data)); // 상태 업데이트
+            });
+            getItem({object_name, detail_url, thumbnail, object_url })
         }
         
     
@@ -57,7 +70,7 @@ function ItemBox(props){
                 backgroundColor : choiced?  '#19ce618c' : '#D9D9D9' ,
             }}
             >
-                <img src={image} alt="상품 이미지" />
+                <img src={thumbnail} alt="상품 이미지" />
             </Wrapper>
             <ItemName href={url} dangerouslySetInnerHTML={{ __html: object_name }}></ItemName>
         </Container>
