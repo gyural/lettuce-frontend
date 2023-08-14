@@ -133,6 +133,7 @@ function ItemSelect1 (){
     
     // url만 넘겨주면 된다!!!
     const query = GetQueryString()
+    
     //Edit 반환된 query값을 매개변수로 OPEN API 호출 마운트시에만 실행하기!!
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
@@ -193,9 +194,9 @@ function ItemSelect1 (){
             }}>
             <ItemInput
                 onClick = {() =>{ 
-                    // getSearchitem(value);
-                    // navigate('/select1', { state: value });
                     navigate(`/select1?search=${value}`)
+                    getSearchitem(value); 
+                    // navigate만 하면 같은 페이지라서 검색이 되지 않아 getSearchitem을 추가해줌
                 }}
                 getValue = {getValue}
             />
