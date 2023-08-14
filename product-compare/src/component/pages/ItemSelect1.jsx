@@ -72,8 +72,10 @@ function ItemSelect1 (){
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
         // 해당 itemBox info return
+        
         const index = selectedItems.findIndex((el) => el.object_name === itemInfo.object_name);
         if(index === -1){
+            console.log(itemInfo)
             setSelectedItems(selectedItems => [...selectedItems, itemInfo]);
         }
         else{
