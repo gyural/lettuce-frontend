@@ -236,7 +236,7 @@ function ItemSelect1 (){
             />
         </CompareWrapper>}
         {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} />}
-        </test>
+        </>
 
         
     )

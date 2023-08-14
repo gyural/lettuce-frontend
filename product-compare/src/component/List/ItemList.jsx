@@ -5,7 +5,7 @@ import { ModeContext } from "../pages/ItemSelect1";
 import ChoiceButton from "../ui/ChoiceButton";
 
  const Container = styled.div`
-    width: ${size}; 
+    width: ${props=>props.size}; 
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -14,18 +14,16 @@ import ChoiceButton from "../ui/ChoiceButton";
     row-gap: 10px;
 `;
 
+
 function ItemList(props) {
   const size = props.max ? '100%' : '918px'; // 조건에 따라 size 변수 설정
- 
-function ItemList(props) {
-
   const getItemURL = ((productId) =>{
     return ('https://search.shopping.naver.com/catalog/' + productId)
   })
   const itemList = props.items;
   const mode = props.mode
   return (
-    <Container>
+    <Container size={size}>
       {itemList.map((el, index) => (
         <ItemBox
           key = {index}
