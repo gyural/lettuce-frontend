@@ -17,14 +17,14 @@ const StyleButton = styled.div`
 function Button(props){
 
 
-    const {size, title, bgcolor, color, onClick, radius, hoverColor=''} = props;
+    const {size, title, bgcolor, color, onClick, radius, hovercolor=''} = props;
     return (
         <StyleButton 
                 size = {size}
                 bgcolor = {bgcolor}
                 color = {color}
                 radius = {radius}
-                hoverColor = {hoverColor}
+                hoverColor = {hovercolor}
                 onClick= {onClick}
             >{title || {title}}</StyleButton>
     )
