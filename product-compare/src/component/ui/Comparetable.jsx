@@ -6,12 +6,12 @@ import axios from 'axios';
 import ParsingItemSpec from "../../APIs/ParsingItemSpec";
 import ParsingItemURL from "../../APIs/ParsingItemURL";
 const Wrapper = styled.div`
-    width: 1920px;
-    height: 260px;
+    width: auto;
+    height: 210px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-    border: 2px solid #3b3939;
+    border: 2px solid #d8e0a5;
     padding: 10px 180px;
     display:flex;
     justify-content: flex-start;
@@ -20,13 +20,19 @@ const Wrapper = styled.div`
 `;
 
 const ItemContainer = styled.div`
-    max-width: 1200px;
-    height: 240px;
+    width: auto;
+    height: 100%;
     display:flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 4px;
     align-items: center;
-    overflow: scroll;
+    scroll-behavior:smooth;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    /* &::-webkit-scrollbar{
+        // 가로 스크롤바 숨기기
+    display: none; 
+    } */
     
 `
 
@@ -34,24 +40,27 @@ const ButtonWrapper = styled.div`
     
 `
 
+const CompareResult = styled.div`
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    height: 600px;
+    background-color: #FAFDE7;
+`
+
 function Comparetable(props){
     console.log('comparetabe 렌더링후 selectedItems 출력!!!')
     const itemList = props.list
     const mode = props.mode
     const pop = props.pop
-    const query = props.query
-    
+    const showResult = props.showResult
     const handleClick = () => {
         pop()
     }
-
-    // 상품상세 URL을 만들어주는 함수
-    // const getDetailURL = (productID) => {
-    //     return 'https://search.shopping.naver.com/catalog/' + encodeURIComponent(productID) + '?' + encodeURIComponent(query)
-    // }
+        
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/';
-        
+
         console.log('넘어온 itemList형태 확인!!!')
         
         
@@ -105,9 +114,10 @@ function Comparetable(props){
                 bgcolor = '#8FDEA5'
                 color = '#000000'
                 onClick = {() => {
-                    dateSend()
 
-                    // dataRecieve()
+                    dateSend()
+                    showResult()
+
                 }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
@@ -125,14 +135,14 @@ function Comparetable(props){
                     left: '20px'
                 }}
                 >
-                <Button
+                {/* <Button
                 title = {'이전'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
                 onClick = {handleClick}
                 radius = {26}
                 >
-                </Button>
+                </Button> */}
             </ButtonWrapper>
             
             <ItemContainer>

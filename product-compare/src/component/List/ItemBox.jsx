@@ -8,12 +8,12 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
-`
-const Wrapper = styled.div`
     width: 200px;
     height: 200px;
+`
+const Wrapper = styled.div`
+    width: 180px;
+    height: 180px;
     padding: 3px 2px;
     overflow: hidden;
     display: flex;
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
     max-height: 100%;
   }
 `
+
 // 문자열에서 HTML 태그를 제거하는 함수
 function removeHtmlTags(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
@@ -46,7 +47,8 @@ function ItemBox(props){
     const [choiced, setChoiced] = useState(false)
     // https://search.shopping.naver.com/catalog/37624157618
     
-    const hadleClick = () =>{
+
+    const handleClick = () =>{
         if (mode === true){
             setChoiced(!choiced)
             const URL = object_url;
@@ -62,7 +64,7 @@ function ItemBox(props){
     }
     return(
         <Container
-            onClick = {hadleClick}>
+            onClick = {handleClick}>
             <Wrapper 
             style={{
                 backgroundColor : choiced?  '#19ce618c' : '#D9D9D9' ,
@@ -70,7 +72,7 @@ function ItemBox(props){
             >
                 <img src={thumbnail} alt="상품 이미지" />
             </Wrapper>
-            <p>{object_name}</p>
+            <ItemName href={url} dangerouslySetInnerHTML={{ __html: object_name }}></ItemName>
         </Container>
     )
 }

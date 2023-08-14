@@ -8,6 +8,7 @@ import logoImage from "../../images/logo.png"
 import ChoiceButton from "../ui/ChoiceButton";
 import itemListVirtual from '../../jsons/itemListVirtual.json'
 import Comparetable from "../ui/Comparetable";
+import ResultCard from "../ui/ResultCard";
 import { useLocation } from "react-router";
 import axios from 'axios';
 
@@ -15,8 +16,8 @@ import axios from 'axios';
 const itemList = itemListVirtual
 
 const Container = styled.div`
-    width: 100%;
-    padding: 80px 40px;
+    width: auto;
+    padding: 20px 40px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -54,19 +55,32 @@ const Wrapper = styled.div`
 `
 
 const CompareWrapper = styled.div`
-    
+    width: 100%;
 `
 function ItemSelect1 (){
-    
+    const [value, setValue] = useState('')
+    const getValue = (inputValue) => {
+        setValue(inputValue)
+    }
     const [choiceMode, setChoiceMode] = useState(false)
     const [selectedItems, setSelectedItems] = useState([])
     const [items, setItems] = useState([])
+    const [resultMode, setResult] = useState(false)
+    const [isResultUp, setIsResultUp] = useState(false);
+
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
         // 해당 itemBox info return
-        setSelectedItems(selectedItems => [...selectedItems, itemInfo])
-        console.log(itemInfo)
+        const index = selectedItems.findIndex((el) => el.object_name === itemInfo.object_name);
+        if(index === -1){
+            setSelectedItems(selectedItems => [...selectedItems, itemInfo]);
+        }
+        else{
+            // 이미 선택된 아이템이라면 선택 해제
+            setSelectedItems(selectedItems => [...selectedItems.slice(0, index), ...selectedItems.slice(index + 1)]);
+        }
+        
     };
     // Comparetable의 이전버튼이 눌러졌을때 list를 pop해주는 핸들러 함수
     const handlePop = () => {
@@ -178,8 +192,9 @@ function ItemSelect1 (){
             }}>
             <ItemInput
                 onClick = {() =>{ 
-                    navigate('/select1')
+                    getSearchitem(value);
                 }}
+                getValue = {getValue}
             />
             
             <ItemList
@@ -202,7 +217,6 @@ function ItemSelect1 (){
             >
                 <ChoiceButton
                 ></ChoiceButton>
-                <p>상품 선택</p>
             </Wrapper>
             
         </Container>
@@ -215,10 +229,15 @@ function ItemSelect1 (){
                 mode = {choiceMode}
                 pop = {handlePop}
                 query = {query}
+                showResult = {(result) => {
+                    setResult(true)
+                    setIsResultUp(false)
+                }}
             />
         </CompareWrapper>}
-    
-        </>
+        {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} />}
+        </test>
+
         
     )
 }
