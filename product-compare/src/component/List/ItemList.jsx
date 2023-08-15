@@ -5,7 +5,13 @@ import { ModeContext } from "../pages/ItemSelect1";
 import ChoiceButton from "../ui/ChoiceButton";
 
 
-
+const Container = styled.div`
+    width: ${props=>props.size}; 
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 10px;
+`;
 
 function ItemList(props) {
   
