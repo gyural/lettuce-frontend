@@ -3,11 +3,11 @@ import styled from "styled-components"
 import Button from "./Button";
 import ItemBox from "../List/ItemBox";
 import axios from 'axios';
-import ParsingItemSpec from "../../APIs/ParsingItemSpec";
-import ParsingItemURL from "../../APIs/ParsingItemURL";
+import ParsingItemSpec from "../../ParsingFunction/ParsingItemSpec";
+import ParsingItemURL from "../../ParsingFunction/ParsingItemURL";
 const Wrapper = styled.div`
     width: auto;
-    height: 210px;
+    height: 300px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
