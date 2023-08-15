@@ -6,25 +6,19 @@ import ChoiceButton from "../ui/ChoiceButton";
 
 
 
+
 function ItemList(props) {
   
   const size = props.max ? '100%' : '918px'; // 조건에 따라 size 변수 설정
-  const Container = styled.div`
-     width: ${size}; 
-     display: flex;
-     justify-content: flex-start;
-     flex-wrap: wrap;
-     padding: 0px 0px;
-     column-gap: 10px;
-     row-gap: 10px;
- `;
+
+
   const getItemURL = ((productId) =>{
     return ('https://search.shopping.naver.com/catalog/' + productId)
   })
   const itemList = props.items;
   const mode = props.mode
   return (
-    <Container>
+    <Container size={size}>
       {itemList.map((el, index) => (
         <ItemBox
           key = {index}

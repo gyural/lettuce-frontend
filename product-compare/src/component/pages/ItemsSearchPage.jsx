@@ -110,7 +110,8 @@ function ItemsSearchPage (){
                 <ItemInput
                     getValue = {getValue}
                     onClick ={(e) =>{
-                        navigate('/select1', { state: value });
+                        // navigate('/select1', { state: value });
+                        navigate(`/select1?search=${value}`)
                     }}
                 ></ItemInput>
             </Container>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ItemInput from "../ui/ItemInput";
 import ItemList from "../List/ItemList";
 import Button from "../ui/Button";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import logoImage from "../../images/logo.png"
 import ChoiceButton from "../ui/ChoiceButton";
 import itemListVirtual from '../../jsons/itemListVirtual.json'
@@ -89,9 +89,10 @@ function ItemSelect1 (){
         setSelectedItems(selectedItems => selectedItems.slice(0, -1))
     }
     // navigate로 넘겨준 props를 console에 찍어주기
-    const Edit = () => {
-        const { state } = useLocation();
-        return state
+    const GetQueryString = () => {
+        const [searchParams, setSearchParams] = useSearchParams();
+        const query = searchParams.get("search");
+        return query;
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
@@ -133,7 +134,7 @@ function ItemSelect1 (){
         
     
     // url만 넘겨주면 된다!!!
-    const query = Edit()
+    const query = GetQueryString()
     //Edit 반환된 query값을 매개변수로 OPEN API 호출 마운트시에만 실행하기!!
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
@@ -194,7 +195,9 @@ function ItemSelect1 (){
             }}>
             <ItemInput
                 onClick = {() =>{ 
-                    getSearchitem(value);
+                    // getSearchitem(value);
+                    // navigate('/select1', { state: value });
+                    navigate(`/select1?search=${value}`)
                 }}
                 getValue = {getValue}
             />
@@ -217,8 +220,7 @@ function ItemSelect1 (){
                     setChoiceMode(!choiceMode);
                 }}
             >
-                <ChoiceButton
-                ></ChoiceButton>
+            <ChoiceButton/>
             </Wrapper>
             
         </Container>

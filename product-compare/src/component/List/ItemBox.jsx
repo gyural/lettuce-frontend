@@ -26,7 +26,11 @@ const Wrapper = styled.div`
     max-height: 100%;
   }
 `
-
+const ItemName = styled.a`
+    text-decoration-line: none;
+    color: black;
+    
+`
 // 문자열에서 HTML 태그를 제거하는 함수
 function removeHtmlTags(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
@@ -79,7 +83,8 @@ function ItemBox(props){
             >
                 <img src={thumbnail} alt="상품 이미지" />
             </Wrapper>
-            <p>{object_name}</p>
+
+            <ItemName href={object_url} dangerouslySetInnerHTML={{ __html: object_name }}></ItemName>
         </Container>
     )
 }
