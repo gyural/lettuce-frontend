@@ -41,16 +41,23 @@ const Front = styled.div`
 `;
 
 const Back = styled.div`
-    width: 85%; /* Set width to 100% */
-    height: 85%; /* Set height to 100% */
+    width: fit-content; /* Set width to 100% */
+    height: fit-content; /* Set height to 100% */
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #19ce618c;
+    color: #fff;
     display: flex;
     flex-direction: column;
     border-radius: 18px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: absolute;
     perspective: 500px;
     backface-visibility: hidden;
+    border: 2px solid #b7151533;
+    box-sizing: border-box;
+    z-index: 5;
     p {
         margin: 5px 0; /* Add margin for spacing between paragraphs */
     }
@@ -77,23 +84,27 @@ function ItemBox(props) {
     const object_url = props.itemURL;
     // 제품 설명
     const detail_url = [];
-    const comments = []
-    const itemInfo = []
+    const comments = [];
+    let score = undefined;
     const price = props.price
     const [choiced, setChoiced] = useState(false);
     const [isMouseInside, setIsMouseInside] = useState(false);
-    const handleMouseEnter = () => {
+    const [itemInfo, setItemInfo] = useState([])
+    const handleMouseEnter = async () => {
         setIsMouseInside(true);
-        if (itemInfo.length < 1){
-            axios.get(object_url).then((res) => {
+    
+        if (itemInfo.length < 1) {
+            try {
+                const res = await axios.get(object_url);
                 const html_doc = res.data;
-                itemInfo.push(ParsingitemInfo(html_doc));
-                console.log(itemInfo);
-            });
-
+                const parsedInfo = ParsingitemInfo(html_doc);
+                setItemInfo([...itemInfo, parsedInfo])
+                }
+            catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
     };
-    
     const handleMouseLeave = () => {
         setIsMouseInside(false);
     };
@@ -132,7 +143,7 @@ function ItemBox(props) {
                 style={{
                     backgroundColor: choiced ? '#19ce618c' : '#ffffff',
                     perspective: '500px',
-                    transition: '.8s',
+                    transition: '1s',
                     backfaceVisibility: 'hidden',
                 }}
                 onClick={handleClick} onMouseOver={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -140,17 +151,24 @@ function ItemBox(props) {
                 <Back
                     style={{
                         transform: !mode && isMouseInside ? 'rotateY(0deg)' : 'rotateY(180deg)',
-                        transition: '.8s',
+                        transition: '1s',
                     }}
                 >
-                    <p>네이버 평정 4.5</p>
+                    <p>네이버 평정 {itemInfo[0] === undefined? '계산중...': itemInfo[0][0]}</p>
+                    <p>총 리뷰 수 : {itemInfo[0] === undefined? '계산중...': itemInfo[0][1]}</p>
                     <p>제품 정보......</p>
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][0]}</p>
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][1]}</p>
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][2]}</p>
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][3]}</p>
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][4]}</p>
+                    
                 </Back>
 
                 <Front
                     style={{
                         transform: !mode && isMouseInside ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                        transition: '.8s',
+                        transition: '1s',
                     }}>
                     <img src={thumbnail} alt="상품 이미지" />
                 </Front>
