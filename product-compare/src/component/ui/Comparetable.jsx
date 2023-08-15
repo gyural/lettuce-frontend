@@ -68,7 +68,8 @@ function Comparetable(props){
             images: {}, // 이미지 데이터를 객체 형태로 저장
             object_name: [],
             thumbnail: [],
-            object_url: []
+            object_url: [],
+            comments: {}
         };
 
         // 이미지를 가져오는 Promise 배열 생성
@@ -78,6 +79,7 @@ function Comparetable(props){
             objFormat.thumbnail.push(element.thumbnail);
             const objName = `obj${idx}`;
             objFormat.images[objName] = element.detail_url;
+            objFormat.comments[objName] = element.comments;
         });
            
 

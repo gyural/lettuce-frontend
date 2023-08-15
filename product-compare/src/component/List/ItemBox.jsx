@@ -2,6 +2,7 @@ import {React, useState, useEffect} from "react";
 import styled from 'styled-components';
 import parsingItemSpec from "../../APIs/ParsingItemSpec";
 import ParsingItemURL from "../../APIs/ParsingItemURL";
+import ParsingItemReview from "../../APIs/ParsingItemReview";
 import axios from "axios";
 const Container = styled.div`
     display: flex;
@@ -40,7 +41,8 @@ function ItemBox(props){
     const object_name = removeHtmlTags(props.title);
     const thumbnail = props.image
     const object_url = props.itemURL
-    const detail_url = [] 
+    const detail_url = []
+    const comments = []
     // function removeQueryString(url) {
     //     const index = url.indexOf('?');
     //     if (index !== -1) {
@@ -59,9 +61,14 @@ function ItemBox(props){
             axios
             .get(URL)
             .then((res) => {
-                detail_url.push(parsingItemSpec(res.data)); // 상태 업데이트
+                const html_doc = res.data
+                detail_url.push(parsingItemSpec(html_doc)); // 상태 업데이트
+                const getComments = ParsingItemReview(html_doc)
+                getComments.forEach(el =>{
+                    comments.push(el)
+                })
             });
-            getItem({object_name, detail_url, thumbnail, object_url })
+            getItem({object_name, detail_url, thumbnail, object_url, comments })
         }
         
     
@@ -76,6 +83,7 @@ function ItemBox(props){
             >
                 <img src={thumbnail} alt="상품 이미지" />
             </Wrapper>
+
             <ItemName href={object_url} dangerouslySetInnerHTML={{ __html: object_name }}></ItemName>
         </Container>
     )
