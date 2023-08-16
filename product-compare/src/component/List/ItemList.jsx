@@ -4,19 +4,21 @@ import ItemBox from "./ItemBox";
 import { ModeContext } from "../pages/ItemSelect1";
 import ChoiceButton from "../ui/ChoiceButton";
 
- const Container = styled.div`
+const Container = styled.div`
+    margin-top: 40px;
     width: ${props=>props.size}; 
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 0px 0px;
-    column-gap: 10px;
-    row-gap: 10px;
+    row-gap: 50px;
+    column-gap: 35px;
 `;
 
-
 function ItemList(props) {
-  const size = props.max ? '100%' : '918px'; // 조건에 따라 size 변수 설정
+  
+  const size = props.max ? '100%' : '1200px'; // 조건에 따라 size 변수 설정
+
+
   const getItemURL = ((productId) =>{
     return ('https://search.shopping.naver.com/catalog/' + productId)
   })
@@ -32,6 +34,7 @@ function ItemList(props) {
           image={el.image || el.thumbnail}
           productId={el.productId}
           mode = {mode}
+          price = {el.lprice}
           itemURL = {getItemURL(el.productId)}
 
         />

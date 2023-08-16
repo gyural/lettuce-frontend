@@ -3,11 +3,11 @@ import styled from "styled-components"
 import Button from "./Button";
 import ItemBox from "../List/ItemBox";
 import axios from 'axios';
-import ParsingItemSpec from "../../APIs/ParsingItemSpec";
-import ParsingItemURL from "../../APIs/ParsingItemURL";
+import ParsingItemSpec from "../../ParsingFunction/ParsingItemSpec";
+import ParsingItemURL from "../../ParsingFunction/ParsingItemURL";
 const Wrapper = styled.div`
     width: auto;
-    height: 210px;
+    height: 300px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
@@ -61,29 +61,50 @@ function Comparetable(props){
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/';
 
-        console.log('넘어온 itemList형태 확인!!!')
         
         
+        const sum_aspects = []
+        //aspect종합해서 만들기
+        itemList.forEach((element) => {
+            sum_aspects.push(...element.aspects); // spread 연산자를 사용하여 각 aspects 배열을 펼쳐서 추가
+        });
+
+        
+        // 각 값의 빈도수를 계산하여 객체로 표현
+        const frequencyMap = sum_aspects.reduce((map, value) => {
+            map[value] = (map[value] || 0) + 1;
+            return map;
+        }, {});
+        
+        // 빈도수가 높은 값 순서대로 정렬
+        const sortedByFrequency = Object.keys(frequencyMap).sort((a, b) => frequencyMap[b] - frequencyMap[a]);
+        const top5Aspects = sortedByFrequency.slice(0, 5);
         const objFormat = {
             images: {}, // 이미지 데이터를 객체 형태로 저장
             object_name: [],
             thumbnail: [],
-            object_url: []
+            object_url: [],
+            comments: {},
+            obj_info: {},
+            aspects: top5Aspects,
         };
 
-        // 이미지를 가져오는 Promise 배열 생성
+        // 데이터 형식 만들기
         itemList.forEach((element, idx) => {
             objFormat.object_name.push(element.object_name);
             objFormat.object_url.push(element.object_url);
             objFormat.thumbnail.push(element.thumbnail);
             const objName = `obj${idx}`;
             objFormat.images[objName] = element.detail_url;
+            objFormat.comments[objName] = element.comments;
+            objFormat.obj_info[objName] = element.obj_info[2];
         });
            
-
+        
         // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
 
         const jsonData = JSON.stringify(objFormat);
+        console.log('최종 보내지는 데이터!!!')
         console.log(jsonData)
         const response = await axios.post(
             apiUrl,
@@ -92,12 +113,13 @@ function Comparetable(props){
             headers: {
                 "Content-Type": "application/json" // 올바른 Content-Type 설정
             }
-            }
-        );
+            },
+            );
             
+            console.log('!!!!!!!!!!!!!!!!!!제발 ㅠㅠ')
+            console.log(response)
             
         };
-
     
     return(
         <Wrapper>
