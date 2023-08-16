@@ -4,6 +4,7 @@ import axios from "axios";
 import parsingItemSpec from "../../ParsingFunction/ParsingItemSpec";
 import ParsingItemReview from "../../ParsingFunction/ParsingItemReview";
 import ParsingitemInfo from "../../ParsingFunction/ParsingitemInfo";
+import ParsingItemAspect from "../../ParsingFunction/ParsingItemAspect";
 
 const Container = styled.div`
     display: flex;
@@ -85,6 +86,8 @@ function ItemBox(props) {
     // 제품 설명
     const detail_url = [];
     const comments = [];
+    const obj_info = [];
+    const aspects = [];
     let score = undefined;
     const price = props.price
     const [choiced, setChoiced] = useState(false);
@@ -117,10 +120,22 @@ function ItemBox(props) {
             const URL = object_url;
             axios.get(URL).then((res) => {
                 const html_doc = res.data;
+                //상품 설명 이미지 뽑아오기
                 detail_url.push(parsingItemSpec(html_doc));
-                const getComments = ParsingitemInfo(html_doc);
-                getComments.forEach((el) => {
+                //상품의 댓글 뽑아오기
+                const getcomments = ParsingItemReview(html_doc)
+                getcomments.forEach((el) => {
                     comments.push(el);
+                });
+                //상품의 기본정보 뽑아오기
+                const getItemInfo = ParsingitemInfo(html_doc);
+                getItemInfo.forEach((el) => {
+                    obj_info.push(el);
+                });
+                //상품의 aspects 뽑아오기
+                const getApects = ParsingItemAspect(html_doc);
+                getApects.forEach((el) => {
+                    aspects.push(el);
                 });
             });
             getItem({
@@ -129,6 +144,8 @@ function ItemBox(props) {
                 thumbnail,
                 object_url,
                 comments,
+                obj_info,
+                aspects,
             });
         
         }
@@ -185,15 +202,6 @@ function ItemBox(props) {
                     </p>
                 </>
                  )}
-                {/* <p>네이버 평정 {itemInfo[0] === undefined? '계산중...': itemInfo[0][0]}</p>
-                    <p>제품 정보......</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][0]}</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][1]}</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][2]}</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][3]}</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][4]}</p> */}
-
-                
                 </Back>
 
                 <Front
