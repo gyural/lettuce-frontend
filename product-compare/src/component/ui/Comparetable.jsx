@@ -82,7 +82,7 @@ function Comparetable(props){
             objFormat.comments[objName] = element.comments;
         });
            
-
+        
         // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
 
         const jsonData = JSON.stringify(objFormat);
@@ -94,12 +94,13 @@ function Comparetable(props){
             headers: {
                 "Content-Type": "application/json" // 올바른 Content-Type 설정
             }
-            }
-        );
+            },
+            );
             
+            console.log('!!!!!!!!!!!!!!!!!!제발 ㅠㅠ')
+            console.log(response)
             
         };
-
     
     return(
         <Wrapper>

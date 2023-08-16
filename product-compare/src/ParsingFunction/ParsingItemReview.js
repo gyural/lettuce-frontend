@@ -20,7 +20,7 @@ function ParsingItemReview(html) {
         return result
     }
     else{
-        return result.slice(0, 5)
+        return result.slice(0, 2)
     }
    
 }

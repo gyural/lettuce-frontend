@@ -105,6 +105,8 @@ function ItemBox(props) {
             }
         }
     };
+
+
     const handleMouseLeave = () => {
         setIsMouseInside(false);
     };
@@ -116,7 +118,7 @@ function ItemBox(props) {
             axios.get(URL).then((res) => {
                 const html_doc = res.data;
                 detail_url.push(parsingItemSpec(html_doc));
-                const getComments = ParsingItemReview(html_doc);
+                const getComments = ParsingitemInfo(html_doc);
                 getComments.forEach((el) => {
                     comments.push(el);
                 });
@@ -128,6 +130,7 @@ function ItemBox(props) {
                 object_url,
                 comments,
             });
+        
         }
     };
     return (
@@ -154,15 +157,43 @@ function ItemBox(props) {
                         transition: '1s',
                     }}
                 >
-                    <p>네이버 평정 {itemInfo[0] === undefined? '계산중...': itemInfo[0][0]}</p>
-                    <p>총 리뷰 수 : {itemInfo[0] === undefined? '계산중...': itemInfo[0][1]}</p>
+                {itemInfo[0] === undefined ? (
+                // 정보를 받아오기 전
+                <>
+                    <p>네이버 평점 계산중.....</p>
+                    <p>네이버 리뷰 수 계산중.....</p>
+                    <p>제품정보 계산중......</p>
+                </>
+                ) : (
+                // 제품 정보가 있는 경우
+                <>
+                    <p>{itemInfo[0][0] === undefined ? '평점 가져오기 실패!!' : `네이버 평점: ${itemInfo[0][0]}`}</p>
+                    <p>{itemInfo[0][1] === undefined ? '계산중...' : `총 리뷰 수: ${itemInfo[0][1]}`}</p>
+
+                    <p>
+                    {itemInfo[0][2] === undefined ? (
+                        "상품 정보가 없습니다..."
+                    ) : (
+                        <>
+                            {itemInfo[0][2].length < 5 ? (
+                                itemInfo[0][2].map((info, i) => <p key={i}>{info}</p>)
+                            ) : (
+                                itemInfo[0][2].slice(0, 5).map((info, i) => <p key={i}>{info}</p>)
+                            )}
+                        </>
+                    )}
+                    </p>
+                </>
+                 )}
+                {/* <p>네이버 평정 {itemInfo[0] === undefined? '계산중...': itemInfo[0][0]}</p>
                     <p>제품 정보......</p>
                     <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][0]}</p>
                     <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][1]}</p>
                     <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][2]}</p>
                     <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][3]}</p>
-                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][4]}</p>
-                    
+                    <p>{itemInfo[0] === undefined? '계산중...': itemInfo[0][2][4]}</p> */}
+
+                
                 </Back>
 
                 <Front
