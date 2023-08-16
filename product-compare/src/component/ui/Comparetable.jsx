@@ -3,11 +3,11 @@ import styled from "styled-components"
 import Button from "./Button";
 import ItemBox from "../List/ItemBox";
 import axios from 'axios';
-import ParsingItemSpec from "../../APIs/ParsingItemSpec";
-import ParsingItemURL from "../../APIs/ParsingItemURL";
+import ParsingItemSpec from "../../ParsingFunction/ParsingItemSpec";
+import ParsingItemURL from "../../ParsingFunction/ParsingItemURL";
 const Wrapper = styled.div`
     width: auto;
-    height: 210px;
+    height: 300px;
     background-color: #FAFDE7;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
@@ -82,7 +82,7 @@ function Comparetable(props){
             objFormat.comments[objName] = element.comments;
         });
            
-
+        
         // 모든 이미지가 가져와지고 Promise가 resolve된 후에 데이터 전송
 
         const jsonData = JSON.stringify(objFormat);
@@ -94,12 +94,13 @@ function Comparetable(props){
             headers: {
                 "Content-Type": "application/json" // 올바른 Content-Type 설정
             }
-            }
-        );
+            },
+            );
             
+            console.log('!!!!!!!!!!!!!!!!!!제발 ㅠㅠ')
+            console.log(response)
             
         };
-
     
     return(
         <Wrapper>

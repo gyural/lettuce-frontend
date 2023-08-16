@@ -1,5 +1,4 @@
-import axios from "axios";
-import cheerio from 'cheerio';
+const cheerio = require('cheerio')
 
 function ParsingItemReview(html) {
     // 외부 HTML 문서의 내용을 가져옴
@@ -21,7 +20,7 @@ function ParsingItemReview(html) {
         return result
     }
     else{
-        return result.slice(0, 5)
+        return result.slice(0, 2)
     }
    
 }
