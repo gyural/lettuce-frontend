@@ -28,8 +28,9 @@ const Card = styled.div`
     top: 0%;
     width: 100%;
     height: 100%;
+    opacity: 0.98;
     /* background-color: #FAFDE7; */
-    background: rgba(250, 253, 230, 0.85);
+    background: #50514e;
     backdrop-filter: blur(15px);
     /* box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2); */
 
@@ -51,18 +52,21 @@ const Title = styled.div`
     user-select: none;
 `
 const Container = styled.div`
+    opacity: 1;
+
     box-sizing: border-box;
     position: absolute;
-    top: 25%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: auto;
+    height: 80%;
     min-height: 200px;
-    background-color: #C2E3C1;
+    background-color: #ffffff;
+    border: 4px solid #9edf9c;
     border-radius: 20px;
     /* border: 2px solid #b8d6b7; */
     padding: 10px 30px;
@@ -99,28 +103,44 @@ const AspectWrapper = styled.div`
   text-align: center;
   line-height: 40px;
   font-size: 16px;
-  background-color: ${(props) => (props.isFocused ? "#19CE60" : "#19CE604D")};
-  color: #fff;
+  box-shadow: 3px 3px 3px #636262;
+  background-color: ${(props) => (props.isFocused ? "#4b4949" : "#fff")};
+  color: ${(props) => (props.isFocused ? "#fff" : "#000000")};
   margin: 4px 12px;
   border-radius: 70px;
   
 `
 
 const AspectResult = styled.div`
-  border: 2px solid #19CE60;
+  /* border: 2px solid #19CE60; */
   width: 90%;
-
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  
 
 `
 
 const ImageWrapper = styled.div`
-  width: 200px;
-  height: 200px;
-
+  width: 240px;
+  height: 240px;
+  border-radius: 18px;
+  box-shadow: 3px 3px 4px 3px #727171;
+  border-radius: 14px;
+  position: absolute;
+  top: 20%;
+  left: 35%;
   img{
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
   }
+`;
+
+const DescriptionWrapper = styled.div`
+  position: absolute;
+  left: 9%;
+  width: 80%;
+  bottom: 20%;
 `;
 function ResultCard(props){
     const [focusedIndex, setFocusedIndex] = useState(0)
@@ -164,7 +184,7 @@ function ResultCard(props){
         <Card>
           <Container>
             <AspectListWrapper>
-              <Title>비교결과</Title>
+              {/* <Title>비교결과</Title> */}
               {aspeectList.map((el, index) => (
                 <AspectWrapper
                   key={index}
@@ -184,17 +204,18 @@ function ResultCard(props){
               ):
               (
                 <AspectResult>
-                <p>Get 요청을 해온 결과!!!</p>
-                <ImageWrapper
-                  >
-                  <img
-                    src={compareResult[focusedIndex].selected_obj_thumbnail}
-                    alt="결과 상품 썸네일"
-                    />;
-                </ImageWrapper>
-                
-                <p>선택이유는 다음과 같습니다...</p>
-                <p>{compareResult[focusedIndex].select_reason}</p>
+                  <ImageWrapper
+                    >
+                    <img
+                      src={compareResult[focusedIndex].selected_obj_thumbnail}
+                      alt="결과 상품 썸네일"
+                      />
+                  </ImageWrapper>
+                  <DescriptionWrapper>
+                    <p>선택이유는 다음과 같습니다...</p>
+                    <p>{compareResult[focusedIndex].select_reason}</p>
+                  </DescriptionWrapper>
+                  
 
                 </AspectResult>
               

@@ -17,6 +17,7 @@ const StyledInput = styled.input`
     padding: 12px;
     box-sizing: border-box;
     text-align: center;
+    border-radius: 2px solid;
     box-shadow: 3px 3px 3px #727171;
     &:focus{
         outline: none;
@@ -71,7 +72,9 @@ function ItemInput (props){
             onKeyPress={handleKeyPress}
             ></StyledInput>
             <ImageWrapper 
+            style={{cursor: 'pointer'}}
             onClick = {handleSubmit}
+
             >
             <img src={searchImage} alt="돋보기" />
             </ImageWrapper>

@@ -27,13 +27,14 @@ const Container = styled.div`
 `;
 const Header = styled.div`
     width: 100%;
-    height: 82px;
+    height: 114px;
     background-color: #ffffff;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* box-shadow: 3px 3px 5px #4f4d4d; */
+    box-shadow: 3px 3px 3px #bdbcbc;
     position: relative;
+    border-radius: 14px;
     img{
         height: 100%;
     }
@@ -152,18 +153,20 @@ function ItemSelect1 (){
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
         getSearchitem(query);
-      }, []); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행함을 의미
+      }, [value]); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행함을 의미
     return(
         <>
         <Header style={{
-            position: 'relative',
-            marginBottom: '24px', 
+            position: 'fixed',
+            marginBottom: '24px',
+            zIndex: '1',
+
             
             }}>
             <Banner style={{
                 position: 'absolute',
                 top: '20%',
-                right: '22%',
+                right: '28%',
                 }}>
             <img src= {logoImage} alt="상추 이미지" />
             <p style={{
@@ -206,14 +209,16 @@ function ItemSelect1 (){
         </Header>
         
         <Container style={{
-            position: 'relative',
+            position: 'absolute',
+            top: '154px',
+            left: '13%',
             ...(choiceMode && { marginBottom: '260px' })
             }}>
             <ItemInput
                 onClick = {() =>{ 
                     // getSearchitem(value);
-                    // navigate('/select1', { state: value });
-                    navigate(`/select1?search=${value}`)
+                    navigate(`/select1?search=${value}`);
+                    // navigate(`/select1?search=${value}`)
                 }}
                 getValue = {getValue}
             />
@@ -229,7 +234,7 @@ function ItemSelect1 (){
                     display: "flex",
                     flexDirection: "column",
                     position: 'absolute',
-                    right: '120px',
+                    right: '-50px',
                     top: '200px',
                 }}
                 onClick = {() =>{

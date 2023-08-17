@@ -16,7 +16,7 @@ const Container = styled.div`
 
 function ItemList(props) {
   
-  const size = props.max ? '100%' : '1400px'; // 조건에 따라 size 변수 설정
+  const size = props.max ? '100%' : '1370px'; // 조건에 따라 size 변수 설정
 
 
   const getItemURL = ((productId) =>{
