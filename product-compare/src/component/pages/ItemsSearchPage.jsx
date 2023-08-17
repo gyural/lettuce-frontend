@@ -10,7 +10,7 @@ import logoImage from "../../images/logo.png"
 const Container = styled.div`
     background-color: #63DE68;
     width: 100%;
-    height: 1080px;
+    height: 994px;
     padding: 80px 0;
     display: flex;
     flex-direction: column;
@@ -21,6 +21,7 @@ const Container = styled.div`
 
 const Header = styled.div`
     width: 100%;
+    height: 100%;
     background-color: #63DE68;
     display: flex;
     justify-content: flex-end;
@@ -60,7 +61,9 @@ function ItemsSearchPage (){
     }
 
     return(
-        <><Header>
+        <test
+            style={{height: '100%',}}
+        ><Header>
             <ButtonWrapper>
                 <Button
                     style={{
@@ -115,7 +118,7 @@ function ItemsSearchPage (){
                     }}
                 ></ItemInput>
             </Container>
-        </>
+        </test>
     )
 }
 

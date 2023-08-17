@@ -28,11 +28,12 @@ const Container = styled.div`
 const Header = styled.div`
     width: 100%;
     height: 82px;
-    background-color: #63DE68;
+    background-color: #ffffff;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    box-shadow: 3px 3px 5px #101010
+    /* box-shadow: 3px 3px 5px #4f4d4d; */
+    position: relative;
     img{
         height: 100%;
     }
@@ -67,7 +68,8 @@ function ItemSelect1 (){
     const [items, setItems] = useState([])
     const [resultMode, setResult] = useState(false)
     const [isResultUp, setIsResultUp] = useState(false);
-
+    const [itemAspect, setItemAspect] = useState([])
+    const [compareId, setCompareId] = useState(undefined)
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
@@ -84,6 +86,17 @@ function ItemSelect1 (){
         }
         
     };
+    //비교하기 클릭시 Aspect를 state로 반환하는 함수
+    const getAspect= (Aspect) =>{
+        setItemAspect([...Aspect])
+        
+    }
+
+    const getCompareId = (id) =>{
+        console.log('여기서의 ')
+        console.log(id)
+        setCompareId(id)
+    }
     // Comparetable의 이전버튼이 눌러졌을때 list를 pop해주는 핸들러 함수
     const handlePop = () => {
         setSelectedItems(selectedItems => selectedItems.slice(0, -1))
@@ -114,7 +127,7 @@ function ItemSelect1 (){
           .then((res) => {
               const filteredItems = filteringSmartStore(res.data.items)
               console.log('필터링된 아이템 목록들!!!')
-              console.log(filteredItems)
+              console.log(res.data.items)
               setItems(filteredItems)
             }
           )
@@ -144,9 +157,12 @@ function ItemSelect1 (){
         <>
         <Header style={{
             position: 'relative',
+            marginBottom: '24px', 
+            
             }}>
             <Banner style={{
                 position: 'absolute',
+                top: '20%',
                 right: '22%',
                 }}>
             <img src= {logoImage} alt="상추 이미지" />
@@ -237,9 +253,15 @@ function ItemSelect1 (){
                     setResult(true)
                     setIsResultUp(false)
                 }}
+                getAspect = {getAspect}
+                getCompareId = {getCompareId}
             />
         </CompareWrapper>}
-        {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} />}
+        {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} 
+                        aspect = {itemAspect} 
+                        aspectResult = {['측면1 결과....','측면2 결과....','측면3 결과....','측면4 결과....','측면5 결과....']}
+                        compareId = {compareId}
+                        />}
         </>
 
         

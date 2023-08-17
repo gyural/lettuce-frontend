@@ -10,13 +10,13 @@ const Container = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    row-gap: 50px;
-    column-gap: 35px;
+    row-gap: 20px;
+    column-gap: 10px;
 `;
 
 function ItemList(props) {
   
-  const size = props.max ? '100%' : '1200px'; // 조건에 따라 size 변수 설정
+  const size = props.max ? '100%' : '1400px'; // 조건에 따라 size 변수 설정
 
 
   const getItemURL = ((productId) =>{

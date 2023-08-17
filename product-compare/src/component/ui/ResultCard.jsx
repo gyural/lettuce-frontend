@@ -1,7 +1,7 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import styled, {css, keyframes} from "styled-components";
 import SlideButton from "./SlideButton";
-
+import axios from 'axios';
 
 const slideUp = keyframes`
   from {
@@ -35,12 +35,11 @@ const Card = styled.div`
 
 `
 const Title = styled.div`
-    box-sizing: border-box;
-    position: relative;
-    top: 50%;
+    /* box-sizing: border-box; */
+    /* position: relative; */
     width: 100px;
     height: 40px;
-    line-height: 40px;
+    /* line-height: 40px; */
     border-radius: 70px;
     background-color: #19CE604D;
     color: #000;
@@ -58,7 +57,9 @@ const Container = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: auto;
     min-height: 200px;
     background-color: #C2E3C1;
@@ -83,29 +84,125 @@ const Wrapper = styled.div`
     animation-fill-mode: forwards;
     box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2);
 `
+const AspectListWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
 
+`;
+
+const AspectWrapper = styled.div`
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  background-color: ${(props) => (props.isFocused ? "#19CE60" : "#19CE604D")};
+  color: #fff;
+  margin: 4px 12px;
+  border-radius: 70px;
+  
+`
+
+const AspectResult = styled.div`
+  border: 2px solid #19CE60;
+  width: 90%;
+
+
+`
+
+const ImageWrapper = styled.div`
+  width: 200px;
+  height: 200px;
+
+  img{
+    width: 95%;
+    height: 95%;
+  }
+`;
 function ResultCard(props){
+    const [focusedIndex, setFocusedIndex] = useState(0)
+    const [compareResult, setCompareResult] = useState(undefined)
     const weight = props.weight;
-    const isUp = props.isUp;
-    
-    const result = props.result;
+    const isUp = props.isUp;  
+    const result = props.aspectResult;
     const item = props.item;
     const onButtonClick = props.onButtonClick;
+    const aspeectList = props.aspect;
+    const compareId = props.compareId
+    console.log('CompareId!!!')
+    console.log(compareId)
+    useEffect(() => {
+      // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
+      const apiUrl = 'http://127.0.0.1:8000/api/ocr/comparelists/';
+      axios.get(apiUrl).then((res) =>{
+          const result_json = res.data[compareId - 1]["result"][0];
+          const result_jsonValue = Object.values(Object.values(result_json))
+          const resultArray = [];
+          console.log(result_jsonValue)
+          for (let i = 1; i <= 5; i++) {
+            const resKey = `res${i}`;
+            if (result_jsonValue[0].hasOwnProperty(resKey)) {
+              resultArray.push(result_jsonValue[0][resKey]);
+            }
+          }
+          console.log(resultArray)
+          setCompareResult(resultArray)
+      })
+    }, [compareId]);
     
-    return(
-        <Wrapper move={isUp}>
-            <SlideButton onClick={()=>{
-                    onButtonClick(!isUp)
-                    }}/>
-            <Card>
+    
+      
+    
+    return (
+      <Wrapper move={isUp}>
+        <SlideButton onClick={() => {
+          onButtonClick(!isUp);
+        }} />
+        <Card>
+          <Container>
+            <AspectListWrapper>
+              <Title>비교결과</Title>
+              {aspeectList.map((el, index) => (
+                <AspectWrapper
+                  key={index}
+                  isFocused={focusedIndex === index}
+                  onClick={() => setFocusedIndex(index)}
+                >
+                  <p>{el}</p>
+                </AspectWrapper>
+              ))}
+            </AspectListWrapper>
+            
+            
+              {compareResult === undefined?  (
+                <AspectResult>
+                  <p>{aspeectList[focusedIndex]} 측면 결과 가져오는중....</p>
+                </AspectResult>
+              ):
+              (
+                <AspectResult>
+                <p>Get 요청을 해온 결과!!!</p>
+                <ImageWrapper
+                  >
+                  <img
+                    src={compareResult[focusedIndex].selected_obj_thumbnail}
+                    alt="결과 상품 썸네일"
+                    />;
+                </ImageWrapper>
                 
-                <Container>
-                    <Title >비교결과</Title>
-                    <p>총 {item.length}개의 상품을 비교했습니다.</p>
-                    <p>{result}</p>
-                </Container>
-            </Card>
-        </Wrapper>
+                <p>선택이유는 다음과 같습니다...</p>
+                <p>{compareResult[focusedIndex].select_reason}</p>
+
+                </AspectResult>
+              
+              )}
+
+          </Container>
+        </Card>
+      </Wrapper>
     );
 }
 

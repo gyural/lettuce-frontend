@@ -8,13 +8,13 @@ import ParsingItemURL from "../../ParsingFunction/ParsingItemURL";
 const Wrapper = styled.div`
     width: auto;
     height: 300px;
-    background-color: #FAFDE7;
+    background-color: #f6f6f6;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-    border: 2px solid #d8e0a5;
+    border: 2px solid #90908d;
     padding: 10px 180px;
     display:flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     position: relative;
 `;
@@ -54,14 +54,14 @@ function Comparetable(props){
     const mode = props.mode
     const pop = props.pop
     const showResult = props.showResult
+    const getAspect = props.getAspect
+    const getCompareId = props.getCompareId
     const handleClick = () => {
         pop()
     }
         
     const dateSend = async () => {
         const apiUrl = 'http://127.0.0.1:8000/api/ocr/obj/';
-
-        
         
         const sum_aspects = []
         //aspect종합해서 만들기
@@ -69,7 +69,6 @@ function Comparetable(props){
             sum_aspects.push(...element.aspects); // spread 연산자를 사용하여 각 aspects 배열을 펼쳐서 추가
         });
 
-        
         // 각 값의 빈도수를 계산하여 객체로 표현
         const frequencyMap = sum_aspects.reduce((map, value) => {
             map[value] = (map[value] || 0) + 1;
@@ -79,6 +78,7 @@ function Comparetable(props){
         // 빈도수가 높은 값 순서대로 정렬
         const sortedByFrequency = Object.keys(frequencyMap).sort((a, b) => frequencyMap[b] - frequencyMap[a]);
         const top5Aspects = sortedByFrequency.slice(0, 5);
+        getAspect(top5Aspects)
         const objFormat = {
             images: {}, // 이미지 데이터를 객체 형태로 저장
             object_name: [],
@@ -106,21 +106,20 @@ function Comparetable(props){
         const jsonData = JSON.stringify(objFormat);
         console.log('최종 보내지는 데이터!!!')
         console.log(jsonData)
-        const response = await axios.post(
-            apiUrl,
-            jsonData,
-            {
+        axios.post(apiUrl, jsonData, {
             headers: {
-                "Content-Type": "application/json" // 올바른 Content-Type 설정
+                "Content-Type": "application/json"
             }
-            },
-            );
-            
-            console.log('!!!!!!!!!!!!!!!!!!제발 ㅠㅠ')
-            console.log(response)
-            
-        };
-    
+        })
+        .then(response => {
+            console.log('함수 호출 전:', response.data.id);
+            getCompareId(response.data.id);
+            showResult()
+        })
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
+    }
     return(
         <Wrapper>
             <ButtonWrapper
@@ -138,7 +137,7 @@ function Comparetable(props){
                 onClick = {() => {
 
                     dateSend()
-                    showResult()
+                    
 
                 }
                 // alert('비교하기 창으로 넘어가기!!!')

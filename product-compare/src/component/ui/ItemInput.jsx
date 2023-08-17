@@ -12,7 +12,7 @@ const StyledInput = styled.input`
     width: 1080px;
     height: 88px;
     border-radius: 43px;
-    border: 3px #04cf5c solid;
+    border: 3px #fafffc solid;
     font-size: 28px;
     padding: 12px;
     box-sizing: border-box;
@@ -28,14 +28,14 @@ const StyledInput = styled.input`
     `
 
 const ImageWrapper = styled.div`
-    width: 94px;
+    width: 88px;
     border-radius: 70px;
-    height: 94px;
-    background-color: #04cf5c;
+    height: 88px;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    right: -2px;
+    right: 0px;
     bottom: 0;
     position: absolute;
 `

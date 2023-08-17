@@ -16,17 +16,17 @@ const Container = styled.div`
     position: relative;
     border-radius: 18px;
     box-shadow: 3px 3px 4px 3px #727171;
-    padding: 4px 0;
+    padding: 0px 0;
     margin: 8px;
     `;
 
 
 const Front = styled.div`
-    width:90%;
-    height: 90%;
+    width:100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     border-radius: 18px;
     transition: 0.8s;
@@ -36,8 +36,9 @@ const Front = styled.div`
     backface-visibility: hidden;
     img {
         display: block;
-        width: 80%;
-        height: 80%;
+        border-radius: 18px;
+        width: 95%;
+        height: 95%;
     }
 `;
 
@@ -218,6 +219,8 @@ function ItemBox(props) {
                 marginLeft: '6px',
                 width: '220px',
                 display: 'block',
+                fontWeight: '700',
+                fontSize: '16px',
             }}
             href={object_url} dangerouslySetInnerHTML={{ __html: object_name }}
         />
@@ -229,7 +232,7 @@ function ItemBox(props) {
                     marginLeft: '6px',
                     width: '220px',
                 }}
-            >네이버 최저가!!!{price}</p>
+            >네이버 최저가!!!{price}원</p>
         </test>
         
     );

@@ -11,24 +11,27 @@ function ParsingItemReview(html) {
     const reviewTexts = $('.reviewItems_text__XrSSf').map((index, element) => {
         return $(element).text();
     })
+    const maxLength = 100;
     const result = reviewTexts.toArray()
+    const trimmedArray = result.map(str => {
+        if (str.length > maxLength) {
+            return str.substring(0, maxLength); // 지정된 길이까지 자르기
+        } else {
+            return str;
+        }
+    });
     // 리뷰 개수를 조정하기
     if (result.length == 0){
         return -1
     }
     else if(result.length < 5){
-        return result
+        return trimmedArray
     }
     else{
-        return result.slice(0, 2)
+        return trimmedArray.slice(0, 3)
     }
    
 }
 
 
 export default ParsingItemReview;
-
-
-
-
-
