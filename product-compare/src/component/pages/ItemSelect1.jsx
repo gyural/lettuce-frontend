@@ -1,4 +1,4 @@
-import {React, useState, createContext, useEffect} from "react";
+import {React, useState, useContext, useEffect} from "react";
 import styled from 'styled-components'
 import ItemInput from "../ui/ItemInput";
 import ItemList from "../List/ItemList";
@@ -11,6 +11,8 @@ import Comparetable from "../ui/Comparetable";
 import ResultCard from "../ui/ResultCard";
 import { useLocation } from "react-router";
 import axios from 'axios';
+import { AuthContext } from "../../App";
+
 
 
 const itemList = itemListVirtual
@@ -64,13 +66,17 @@ function ItemSelect1 (){
     const getValue = (inputValue) => {
         setValue(inputValue)
     }
-    const [choiceMode, setChoiceMode] = useState(false)
-    const [selectedItems, setSelectedItems] = useState([])
-    const [items, setItems] = useState([])
-    const [resultMode, setResult] = useState(false)
+    const [choiceMode, setChoiceMode] = useState(false);
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [items, setItems] = useState([]);
+    const [resultMode, setResult] = useState(false);
     const [isResultUp, setIsResultUp] = useState(false);
-    const [itemAspect, setItemAspect] = useState([])
-    const [compareId, setCompareId] = useState(undefined)
+    const [itemAspect, setItemAspect] = useState([]);
+    const [compareId, setCompareId] = useState(undefined);
+    const [authInfo, setAuthInfo] = useContext(AuthContext);
+    const isLoggedIn = authInfo.isLoggedIn;
+    const accountID = authInfo.id;
+
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
@@ -149,6 +155,7 @@ function ItemSelect1 (){
     
     // url만 넘겨주면 된다!!!
     const query = GetQueryString()
+    
     //Edit 반환된 query값을 매개변수로 OPEN API 호출 마운트시에만 실행하기!!
     useEffect(() => {
         // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
@@ -177,24 +184,25 @@ function ItemSelect1 (){
             </Banner>
         
             <Wrapper>
-                <Button
-                    
+                {isLoggedIn ? 
+                    <p>{accountID}님</p>:
+                    <Button
                     radius={25}
                     title={" 로그인 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
                     onClick={() => {
                         navigate("/signin");
-                    } } />
+                    } } />}
             </Wrapper>
-            <Wrapper>
+            {/* <Wrapper>
                 <Button
                     radius={25}
                     title={" 장바구니 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
                     onClick={() => { alert('장바구니 버튼 클릭!!!'); } } />
-            </Wrapper>
+            </Wrapper> */}
             <Wrapper>
                 <Button
                     
@@ -216,9 +224,9 @@ function ItemSelect1 (){
             }}>
             <ItemInput
                 onClick = {() =>{ 
-                    // getSearchitem(value);
-                    navigate(`/select1?search=${value}`);
-                    // navigate(`/select1?search=${value}`)
+                    navigate(`/select1?search=${value}`)
+                    getSearchitem(value); 
+                    // navigate만 하면 같은 페이지라서 검색이 되지 않아 getSearchitem을 추가해줌
                 }}
                 getValue = {getValue}
             />
