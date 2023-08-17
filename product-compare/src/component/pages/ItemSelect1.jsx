@@ -1,4 +1,4 @@
-import {React, useState, createContext, useEffect} from "react";
+import {React, useState, useContext, useEffect} from "react";
 import styled from 'styled-components'
 import ItemInput from "../ui/ItemInput";
 import ItemList from "../List/ItemList";
@@ -11,6 +11,8 @@ import Comparetable from "../ui/Comparetable";
 import ResultCard from "../ui/ResultCard";
 import { useLocation } from "react-router";
 import axios from 'axios';
+import { AuthContext } from "../../App";
+
 
 
 const itemList = itemListVirtual
@@ -67,6 +69,9 @@ function ItemSelect1 (){
     const [items, setItems] = useState([])
     const [resultMode, setResult] = useState(false)
     const [isResultUp, setIsResultUp] = useState(false);
+    const [authInfo, setAuthInfo] = useContext(AuthContext);
+    const isLoggedIn = authInfo.isLoggedIn;
+    const accountID = authInfo.id;
 
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
@@ -159,24 +164,25 @@ function ItemSelect1 (){
             </Banner>
         
             <Wrapper>
-                <Button
-                    
+                {isLoggedIn ? 
+                    <p>{accountID}님</p>:
+                    <Button
                     radius={25}
                     title={" 로그인 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
                     onClick={() => {
                         navigate("/signin");
-                    } } />
+                    } } />}
             </Wrapper>
-            <Wrapper>
+            {/* <Wrapper>
                 <Button
                     radius={25}
                     title={" 장바구니 "}
                     bgcolor={'#58B37C'}
                     color={'#000000'}
                     onClick={() => { alert('장바구니 버튼 클릭!!!'); } } />
-            </Wrapper>
+            </Wrapper> */}
             <Wrapper>
                 <Button
                     

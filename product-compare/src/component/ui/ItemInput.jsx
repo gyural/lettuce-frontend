@@ -4,12 +4,14 @@ import searchImage from "../../images/search_image.png"
 
 const Container = styled.div`
     max-width: 1080px; /* 너비를 1350px로 변경 */
-    margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
+    min-width: 512px;
+    width: auto;
+    margin: 0px 10px; /* 가운데 정렬을 위해 margin을 auto로 설정 */
     position: relative;
 `
 const StyledInput = styled.input`
     
-    width: 1080px;
+    width: 100%;
     height: 88px;
     border-radius: 43px;
     border: 3px #04cf5c solid;
