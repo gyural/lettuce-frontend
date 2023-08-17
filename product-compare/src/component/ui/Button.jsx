@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 const StyleButton = styled.div`
   padding: 8px 16px;
+  box-shadow: 3px 3px 3px #636262;
   font-size: ${props => `${1 + props.size}px`};
   border-width: 1px;
   background-color: ${props => props.bgcolor || '#ffffff'};

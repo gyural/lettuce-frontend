@@ -53,6 +53,8 @@ const Logo = styled.div`
     font-size: 72px;
     font-weight: 700;
 `
+
+
 function ItemsSearchPage (){
     const navigate = useNavigate();
     const [value, setValue] = useState('')
