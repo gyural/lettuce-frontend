@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "./Button";
 import kakao_signup from '../../images/kakao_signup.png';
 import naver_signup from '../../images/naver_signup.png';
+import {register} from '../../Authentication/Auth'
 
 const Container = styled.div`
     border: 2px solid #19CE60;
@@ -50,7 +51,15 @@ function SignupCard(props){
     const handleSubmit = () =>{
         //여기에 form 데이터를 서버로 제출하는 로직을 작성하고
         //임시로 콘솔창에 출력하겠습니다.
-        console.log(formData)
+        if(formData.check_password === formData.password){
+            console.log(formData)
+            register(formData.id, formData.password)
+        }
+        else{
+            alert('비밀번호 재확인이 일치하지 않습니다.');
+        }
+        
+
     }
 
     const handleChange = (e) => {
@@ -82,7 +91,7 @@ function SignupCard(props){
                     type="text"
                     name="id"
                     value={formData.id}
-                    placeholder="아이디를 입력해주세요"
+                    placeholder="이메일을 입력해주세요"
                     onChange={handleChange}
                 />
                 <Input
@@ -93,19 +102,19 @@ function SignupCard(props){
                     onChange={handleChange}
                 />
                 <Input
-                    type="check_password"
+                    type="password"
                     name="check_password"
                     placeholder="비밀번호를 재입력해주세요"
-                    value={formData.password}
+                    value={formData.check_password}
                     onChange={handleChange}
                 />
-                <Input
+                {/* <Input
                     type="email"
                     name="email"
                     placeholder="이메일을 입력해주세요"
                     value={formData.password}
                     onChange={handleChange}
-                />
+                /> */}
             </form>
             
             

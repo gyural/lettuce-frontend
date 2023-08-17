@@ -4,6 +4,8 @@ import Button from "./Button";
 import image1 from '../../images/btnG_완성형.png';
 import image2 from '../../images/kakao_login_large_wide.png';
 import {useNavigate} from "react-router-dom";
+import {login} from '../../Authentication/Auth'
+
 const Container = styled.div`
     border: 2px solid #19CE60;
     width: 500px;
@@ -43,12 +45,16 @@ function LoginCard(props){
         password: '',
         isChecked: true,
     })
-
+    
+    
     const handleSubmit = () =>{
         //여기에 form 데이터를 서버로 제출하는 로직을 작성하고
         //임시로 콘솔창에 출력하겠습니다.
         console.log(formData)
+        login(formData.id, formData.password)
     }
+
+
 
     const handleChange = (e) => {
         const { name, value, checked} = e.target;
@@ -77,7 +83,7 @@ function LoginCard(props){
                     type="text"
                     name="id"
                     value={formData.id}
-                    placeholder="아이디를 입력해주세요"
+                    placeholder="이메일을 입력해주세요"
                     onChange={handleChange}
                 />
                 <Input
