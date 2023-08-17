@@ -225,7 +225,7 @@ function ItemSelect1 (){
             <ItemInput
                 onClick = {() =>{ 
                     navigate(`/select1?search=${value}`)
-                    getSearchitem(value); 
+                    // getSearchitem(value); 
                     // navigate만 하면 같은 페이지라서 검색이 되지 않아 getSearchitem을 추가해줌
                 }}
                 getValue = {getValue}
