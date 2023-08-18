@@ -106,7 +106,7 @@ function Comparetable(props){
         const jsonData = JSON.stringify(objFormat);
         console.log('최종 보내지는 데이터!!!')
         console.log(jsonData)
-        axios.post(apiUrl, jsonData, {
+        axios.post(apiUrl, jsonData,{ withCredentials: true }, {
             headers: {
                 "Content-Type": "application/json"
             }

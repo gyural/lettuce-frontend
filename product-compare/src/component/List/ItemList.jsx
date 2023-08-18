@@ -20,7 +20,7 @@ function ItemList(props) {
 
 
   const getItemURL = ((productId) =>{
-    return ('https://search.shopping.naver.com/catalog/' + productId)
+    return ('http://localhost:3000/api/catalog/' + productId)
   })
   const itemList = props.items;
   const mode = props.mode
