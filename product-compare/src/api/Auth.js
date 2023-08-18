@@ -7,7 +7,7 @@ import api from './api'
 
 const login = async (email, pw, isChecked) => {
     // axios를 이용하여 jwt 로그인 요청을 보낸다.
-    return await axios.post('http://localhost:8000/api/user/auth/', {
+    return await axios.post('http://'+process.env.REACT_APP_DJANGO_SERVER+'/api/user/auth/', {
         'email': email,
         'password': pw,
     }, {withCredentials: true}).then((response) => {
@@ -28,7 +28,7 @@ const login = async (email, pw, isChecked) => {
 
 const register = (email, pw) => {
     // axios를 이용하여 jwt 회원가입 요청을 보낸다.
-    return axios.post('http://localhost:8000/api/user/register/', {
+    return axios.post('http://'+process.env.REACT_APP_DJANGO_SERVER+'/api/user/register/', {
         'email': email,
         'password': pw
     }, {withCredentials: true}).then((response) => {
@@ -44,7 +44,7 @@ const register = (email, pw) => {
     })
 }
 const refresh = async () => {
-    axios.post('http://localhost:8000/api/user/auth/refresh', {withCredentials:true})
+    axios.post('http://'+process.env.REACT_APP_DJANGO_SERVER+'/api/user/auth/refresh', {withCredentials:true})
     .then((response)=>{
         console.log('token refreshed');
     })
@@ -65,7 +65,7 @@ const refresh_interceptor = () => {
             originalRequest._retry = true;
       
             try {
-              const response = await axios.post('http://localhost:8000/api/user/token/refresh/');
+              const response = await axios.post('http://'+process.env.REACT_APP_DJANGO_SERVER+'/api/user/token/refresh/');
 
               return api(originalRequest);
             } catch (error) {

@@ -122,7 +122,7 @@ function ItemSelect1 (){
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
-        const URL = "http://localhost:3000/api/search/shop.json"; // proxy 사용
+        const URL = "http://"+process.env.REACT_APP_HOST_SERVER+"/api/search/shop.json"; // proxy 사용
         const ClientID = "UON8xyX_h_yETd2UkLyZ";
         const ClientSecret = "ZszAjOj5Km";
         await axios

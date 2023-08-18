@@ -178,10 +178,10 @@ function ResultCard(props){
       const apiUrl = 'http://127.0.0.1:8000/api/ocr/comparelists/';
       axios.get(apiUrl).then((res) =>{
           console.log('result데이터 찍어보기!!')
-          if(res.data[1] !== undefined)
+          if(res.data[compareId] !== undefined)
           {
-            console.log(res.data[1])
-            const result_json = res.data[1]["result"][0];
+            console.log(res.data[compareId])
+            const result_json = res.data[compareId]["result"][0];
             const result_jsonValue = Object.values(Object.values(result_json))
             const resultArray = [];
             console.log(result_jsonValue)
