@@ -120,7 +120,7 @@ function Comparetable(props){
         .then(response => {
             console.log('함수 호출 전:', response.data.id);
             getCompareId(response.data.id);
-            showResult()
+            
         })
         .catch(error => {
             console.error('오류 발생:', error);
@@ -143,8 +143,10 @@ function Comparetable(props){
                 bgcolor = '#8FDEA5'
                 color = '#000000'
                 onClick = {()=>{
-                    if(isLoggedIn === true)
+                    if(isLoggedIn === true){
                         dateSend();
+                        showResult();
+                    }
                     else
                         alert('로그인하셔야 비교하기가 가능합니다');
                 }}

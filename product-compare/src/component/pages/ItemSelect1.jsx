@@ -11,6 +11,7 @@ import Comparetable from "../ui/Comparetable";
 import ResultCard from "../ui/ResultCard";
 import { useLocation } from "react-router";
 import axios from 'axios';
+import Loading from "../ui/Loading";
 import { AuthContext } from "../../App";
 
 
@@ -25,12 +26,13 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    
     gap: 42px;
 `;
 const Header = styled.div`
     width: 100%;
     height: 114px;
-    background-color: #63DE68;
+    background-color: #ffffff;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -63,6 +65,7 @@ const Wrapper = styled.div`
 const CompareWrapper = styled.div`
     width: 100%;
 `
+
 function ItemSelect1 (){
     const [value, setValue] = useState('')
     const getValue = (inputValue) => {
@@ -76,6 +79,7 @@ function ItemSelect1 (){
     const [itemAspect, setItemAspect] = useState([]);
     const [compareId, setCompareId] = useState(undefined);
     const [authInfo, setAuthInfo] = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false)
     const isLoggedIn = authInfo.isLoggedIn;
     const accountID = authInfo.id;
 
@@ -98,7 +102,7 @@ function ItemSelect1 (){
     //비교하기 클릭시 Aspect를 state로 반환하는 함수
     const getAspect= (Aspect) =>{
         setItemAspect([...Aspect])
-        
+        console.log(itemAspect)
     }
 
     const getCompareId = (id) =>{
@@ -135,8 +139,8 @@ function ItemSelect1 (){
           .then((res) => {
               const filteredItems = filteringSmartStore(res.data.items)
               console.log('필터링된 아이템 목록들!!!')
-              console.log(res.data.items)
-              setItems(filteredItems)
+              console.log(filteredItems)
+              filteredItems.length === 0? setItems([-1]) : setItems(filteredItems)
             }
           )
           .catch((e) => {});
@@ -152,12 +156,14 @@ function ItemSelect1 (){
                  filteredList.push(item) 
             } 
         }
+        
         return filteredList;
     }
         
     
     // url만 넘겨주면 된다!!!
     const query = GetQueryString()
+    
     
     //Edit 반환된 query값을 매개변수로 OPEN API 호출 마운트시에만 실행하기!!
     useEffect(() => {
@@ -221,10 +227,10 @@ function ItemSelect1 (){
             
             <Container style={{
                 position: 'absolute',
-                
+                width: '1280px',
                 top: '154px',
-                left: '6%',
-                ...(choiceMode && { marginBottom: '260px' })
+                left: '8%',
+                ...(choiceMode && { paddingBottom: '320px' })
                 }}>
                 <ItemInput
                     onClick = {() =>{ 
@@ -234,12 +240,27 @@ function ItemSelect1 (){
                     }}
                     getValue = {getValue}
                 />
-                
-                <ItemList
-                    items = {items}
-                    getItem = {getItem}
-                    mode = {choiceMode}
-                ></ItemList>
+
+                {items.length === 0 ? (
+                    <Loading styled={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}>
+                        
+                    </Loading>
+                ) : (
+                    items[0] === -1 ? (
+                        <p>상품이 존재하지 않습니다!!!</p>
+                    ) : (
+                        <ItemList
+                            items={items}
+                            getItem={getItem}
+                            mode={choiceMode}
+                        />
+                    )
+                )}
+               
 
                 <Wrapper
                     style = {{

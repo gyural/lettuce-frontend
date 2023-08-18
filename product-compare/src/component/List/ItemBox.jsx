@@ -69,7 +69,7 @@ const ItemName = styled.a`
     text-decoration-line: none;
     color: black;
     padding: 5px; /* 아래쪽 여백을 최대로 확보하는데 도움이 됨 */
-    background-color: #fff;
+    background-color: transparent;
     backface-visibility: hidden;
     transition: .8s;
 `;
@@ -119,6 +119,7 @@ function ItemBox(props) {
         if (mode === true) {
             setChoiced(!choiced);
             const URL = object_url;
+            console.log('handleClick 작동!!')
             axios.get(URL).then((res) => {
                 const html_doc = res.data;
                 //상품 설명 이미지 뽑아오기

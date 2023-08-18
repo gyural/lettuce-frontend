@@ -2,7 +2,7 @@ import {React, useEffect, useState} from 'react';
 import styled, {css, keyframes} from "styled-components";
 import SlideButton from "./SlideButton";
 import axios from 'axios';
-
+import Loading from './Loading';
 const slideUp = keyframes`
   from {
     transform: translateY(100%);
@@ -27,7 +27,7 @@ const Card = styled.div`
     position: absolute;
     top: 0%;
     width: 100%;
-    height: 100%;
+    height: 105%;
     opacity: 0.98;
     /* background-color: #FAFDE7; */
     background: #50514e;
@@ -56,14 +56,14 @@ const Container = styled.div`
 
     box-sizing: border-box;
     position: absolute;
-    top: 47%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
+    height: 90%;
     min-height: 200px;
     background-color: #ffffff;
     border: 4px solid #9edf9c;
@@ -81,7 +81,7 @@ const Wrapper = styled.div`
     position: fixed;
     top: 20%;
     width: 100%;
-    height: 80%;
+    height: 81%;
     padding: 0px 0px;
     margin: 0px 0px;
     animation: ${props => (props.move ? css`${slideDown} 0.5s ease-in-out`:css`${slideUp} 0.5s ease-in-out`)};
@@ -91,6 +91,8 @@ const Wrapper = styled.div`
 const AspectListWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  position: absolute;
+  top: 0;
 
 `;
 
@@ -122,14 +124,14 @@ const AspectResult = styled.div`
 `
 
 const ImageWrapper = styled.div`
-  width: 240px;
-  height: 240px;
+  width: 235px;
+  height: 235px;
   border-radius: 18px;
   box-shadow: 3px 3px 4px 3px #727171;
   border-radius: 14px;
   position: absolute;
-  top: 20%;
-  left: 35%;
+  top: 17%;
+  left: 31%;
   img{
     width: 100%;
     height: 100%;
@@ -140,7 +142,22 @@ const DescriptionWrapper = styled.div`
   position: absolute;
   left: 9%;
   width: 80%;
-  bottom: 20%;
+  bottom: 3%;
+`;
+
+const Line = styled.div`
+
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #aaa7a7;
+   
+`;
+
+const ItemTitle = styled.div`
+  font-weight: 700;
+  position: absolute;
+  top: 10%;
 `;
 function ResultCard(props){
     const [focusedIndex, setFocusedIndex] = useState(0)
@@ -149,6 +166,8 @@ function ResultCard(props){
     const isUp = props.isUp;  
     const result = props.aspectResult;
     const item = props.item;
+    console.log('item출력')
+    console.log(item)
     const onButtonClick = props.onButtonClick;
     const aspeectList = props.aspect;
     const compareId = props.compareId
@@ -158,20 +177,23 @@ function ResultCard(props){
       // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
       const apiUrl = 'http://127.0.0.1:8000/api/ocr/comparelists/';
       axios.get(apiUrl).then((res) =>{
-          console.log(res.data)
-          const result_json = res.data[compareId - 1]["result"][0];
-          const result_jsonValue = Object.values(Object.values(result_json))
-          const resultArray = [];
-          console.log(result_jsonValue)
-          for (let i = 1; i <= 5; i++) {
+          console.log('result데이터 찍어보기!!')
+          if(res.data[1] !== undefined)
+          {
+            console.log(res.data[1])
+            const result_json = res.data[1]["result"][0];
+            const result_jsonValue = Object.values(Object.values(result_json))
+            const resultArray = [];
+            console.log(result_jsonValue)
+            for (let i = 1; i <= 5; i++) {
             const resKey = `res${i}`;
             if (result_jsonValue[0].hasOwnProperty(resKey)) {
               resultArray.push(result_jsonValue[0][resKey]);
             }
           }
           console.log(resultArray)
-          setCompareResult(resultArray)
-      })
+          setCompareResult(resultArray)}
+        })
     }, [compareId]);
     
     
@@ -199,12 +221,18 @@ function ResultCard(props){
             
             
               {compareResult === undefined?  (
-                <AspectResult>
+                <AspectResult
+                  style={{
+                    position: 'absolute',
+                    top: '20%',
+                  }}>
+                  <Loading></Loading>
                   <p>{aspeectList[focusedIndex]} 측면 결과 가져오는중....</p>
                 </AspectResult>
               ):
               (
                 <AspectResult>
+                  <ItemTitle>상품명 : {item[compareResult[focusedIndex].selected_object_num-1].object_name}</ItemTitle>
                   <ImageWrapper
                     >
                     <img
@@ -212,7 +240,15 @@ function ResultCard(props){
                       alt="결과 상품 썸네일"
                       />
                   </ImageWrapper>
+                  <Line
+                  style= {{
+                    position: 'absolute',
+                    top: '65%',
+                    left: '0%',
+                  }}
+                  />
                   <DescriptionWrapper>
+                    
                     <p>선택이유는 다음과 같습니다...</p>
                     <p>{compareResult[focusedIndex].select_reason}</p>
                   </DescriptionWrapper>
