@@ -118,8 +118,7 @@ function ItemSelect1 (){
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
-        const URL = "v1/search/shop.json"; // proxy 사용
-        // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
+        const URL = "http://localhost:3000/api/search/shop.json"; // proxy 사용
         const ClientID = "UON8xyX_h_yETd2UkLyZ";
         const ClientSecret = "ZszAjOj5Km";
         await axios

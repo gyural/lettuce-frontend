@@ -54,7 +54,6 @@ function SignupCard(props) {
             if (register(formData.id, formData.password)) {
                 navigate("/signin");
             }
-            debugger;
         } else {
             alert("비밀번호 재확인이 일치하지 않습니다.");
         }
