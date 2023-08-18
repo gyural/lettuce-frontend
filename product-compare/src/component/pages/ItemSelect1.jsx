@@ -19,7 +19,7 @@ const itemList = itemListVirtual
 
 const Container = styled.div`
     width: auto;
-    padding: 20px 40px;
+    padding: 20px 30px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ const Container = styled.div`
 const Header = styled.div`
     width: 100%;
     height: 114px;
-    background-color: #ffffff;
+    background-color: #698976;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -140,6 +140,8 @@ function ItemSelect1 (){
           )
           .catch((e) => {});
     }
+
+    
     // 목록들중 비스마트 스토어들만 필터링 해주는 코드
     const filteringSmartStore = (noneFilteredList) =>{
         const filteredList = []
@@ -163,114 +165,115 @@ function ItemSelect1 (){
       }, [value]); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행함을 의미
     return(
         <>
-        <Header style={{
-            position: 'fixed',
-            marginBottom: '24px',
-            zIndex: '1',
+            <Header style={{
+                position: 'fixed',
+                marginBottom: '24px',
+                zIndex: '1',
 
-            
-            }}>
-            <Banner style={{
-                position: 'absolute',
-                top: '20%',
-                right: '28%',
+                
                 }}>
-            <img src= {logoImage} alt="상추 이미지" />
-            <p style={{
-                fontSize: '36px',
-                display: 'block',
-                marginLeft: '30px',
-            }}>상추</p>
-            </Banner>
-        
-            <Wrapper>
-                {isLoggedIn ? 
-                    <p>{accountID}님</p>:
-                    <Button
-                    radius={25}
-                    title={" 로그인 "}
-                    bgcolor={'#58B37C'}
-                    color={'#000000'}
-                    onClick={() => {
-                        navigate("/signin");
-                    } } />}
-            </Wrapper>
-            {/* <Wrapper>
-                <Button
-                    radius={25}
-                    title={" 장바구니 "}
-                    bgcolor={'#58B37C'}
-                    color={'#000000'}
-                    onClick={() => { alert('장바구니 버튼 클릭!!!'); } } />
-            </Wrapper> */}
-            <Wrapper>
-                <Button
-                    
-                    radius={25}
-                    title={" My비교 "}
-                    bgcolor={'#58B37C'}
-                    color={'#000000'}
-                    onClick={() => { navigate("/mylog")} } />
-            </Wrapper>
-            
-
-        </Header>
-        
-        <Container style={{
-            position: 'absolute',
-            top: '154px',
-            left: '13%',
-            ...(choiceMode && { marginBottom: '260px' })
-            }}>
-            <ItemInput
-                onClick = {() =>{ 
-                    navigate(`/select1?search=${value}`)
-                    // getSearchitem(value); 
-                    // navigate만 하면 같은 페이지라서 검색이 되지 않아 getSearchitem을 추가해줌
-                }}
-                getValue = {getValue}
-            />
-            
-            <ItemList
-                items = {items}
-                getItem = {getItem}
-                mode = {choiceMode}
-            ></ItemList>
-
-            <Wrapper
-                style = {{
-                    display: "flex",
-                    flexDirection: "column",
+                <Banner style={{
                     position: 'absolute',
-                    right: '-50px',
-                    top: '200px',
-                }}
-                onClick = {() =>{
-                    setChoiceMode(!choiceMode);
-                }}
-            >
-            <ChoiceButton/>
-            </Wrapper>
+                    top: '20%',
+                    right: '22%',
+                    }}>
+                <img src= {logoImage} alt="상추 이미지" />
+                <p style={{
+                    fontSize: '36px',
+                    display: 'block',
+                    marginLeft: '30px',
+                }}>상추</p>
+                </Banner>
             
-        </Container>
-        {choiceMode && <CompareWrapper style={{
-            position: 'fixed',
-            bottom: '0',
-        }}>
-            <Comparetable
-                list = {selectedItems}
-                mode = {choiceMode}
-                pop = {handlePop}
-                query = {query}
-                showResult = {(result) => {
-                    setResult(true)
-                    setIsResultUp(false)
-                }}
-                getAspect = {getAspect}
-                getCompareId = {getCompareId}
-            />
-        </CompareWrapper>}
-        {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} 
+                <Wrapper>
+                    {isLoggedIn ? 
+                        <p>{accountID}님</p>:
+                        <Button
+                        radius={25}
+                        title={" 로그인 "}
+                        bgcolor={'#58B37C'}
+                        color={'#000000'}
+                        onClick={() => {
+                            navigate("/signin");
+                        } } />}
+                </Wrapper>
+                {/* <Wrapper>
+                    <Button
+                        radius={25}
+                        title={" 장바구니 "}
+                        bgcolor={'#58B37C'}
+                        color={'#000000'}
+                        onClick={() => { alert('장바구니 버튼 클릭!!!'); } } />
+                </Wrapper> */}
+                <Wrapper>
+                    <Button
+                        
+                        radius={25}
+                        title={" My비교 "}
+                        bgcolor={'#58B37C'}
+                        color={'#000000'}
+                        onClick={() => { navigate("/mylog")} } />
+                </Wrapper>
+                
+
+            </Header>
+            
+            <Container style={{
+                position: 'absolute',
+                
+                top: '154px',
+                left: '6%',
+                ...(choiceMode && { marginBottom: '260px' })
+                }}>
+                <ItemInput
+                    onClick = {() =>{ 
+                        navigate(`/select1?search=${value}`)
+                        // getSearchitem(value); 
+                        // navigate만 하면 같은 페이지라서 검색이 되지 않아 getSearchitem을 추가해줌
+                    }}
+                    getValue = {getValue}
+                />
+                
+                <ItemList
+                    items = {items}
+                    getItem = {getItem}
+                    mode = {choiceMode}
+                ></ItemList>
+
+                <Wrapper
+                    style = {{
+                        display: "flex",
+                        flexDirection: "column",
+                        position: 'absolute',
+                        right: '-30px',
+                        top: '200px',
+                    }}
+                    onClick = {() =>{
+                        setChoiceMode(!choiceMode);
+                    }}
+                >
+                <ChoiceButton/>
+                </Wrapper>
+                
+            </Container>
+            {choiceMode && <CompareWrapper style={{
+                position: 'fixed',
+                bottom: '0',
+            }}>
+                <Comparetable
+                    list = {selectedItems}
+                    mode = {choiceMode}
+                    pop = {handlePop}
+                    query = {query}
+                    showResult = {(result) => {
+                        setResult(true)
+                        setIsResultUp(false)
+                    }}
+                    getAspect = {getAspect}
+                    getCompareId = {getCompareId}
+                />
+            </CompareWrapper>}
+            {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} 
                         aspect = {itemAspect} 
                         aspectResult = {['측면1 결과....','측면2 결과....','측면3 결과....','측면4 결과....','측면5 결과....']}
                         compareId = {compareId}
