@@ -49,13 +49,14 @@ function LoginCard(props) {
         //임시로 콘솔창에 출력하겠습니다.
         console.log(formData);
 
-        login(formData.id, formData.password).then(
+        login(formData.id, formData.password, formData.isChecked).then(
             ()=>{
                 const authInfo = {
                     isLoggedIn: true,
                     id: formData.id,
                 };
                 setIsLoggedIn(authInfo);
+                localStorage.setItem("id", formData.id);
                 navigate("/");
             }
         ).catch(

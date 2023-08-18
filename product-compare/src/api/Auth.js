@@ -5,13 +5,17 @@ import api from './api'
 
 
 
-const login = async (email, pw) => {
+const login = async (email, pw, isChecked) => {
     // axios를 이용하여 jwt 로그인 요청을 보낸다.
     return await axios.post('http://localhost:8000/api/user/auth/', {
         'email': email,
         'password': pw,
     }, {withCredentials: true}).then((response) => {
-        // console.log(response.data)
+        const accessToken = response.data.token.access;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        if(isChecked)
+            localStorage.setItem("access", accessToken);
+
         alert('로그인 성공');
         // 벡엔드에서 httponly 쿠키로 토큰들이 전송되어 로그인됨
         // navigate('/')
@@ -51,7 +55,7 @@ const refresh = async () => {
 }
 
 const refresh_interceptor = () => {
-
+    
     api.interceptors.response.use(
         (response) => response,
         async (error) => {

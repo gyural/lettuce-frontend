@@ -114,7 +114,6 @@ function Comparetable(props){
         axios.post(apiUrl, jsonData, {
             withCredentials: true,
             headers: {
-                // 'Access-Control-Allow-Origin': 'http://localhost:8000',
                 "Content-Type": "application/json"
             }
         })

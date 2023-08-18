@@ -11,9 +11,20 @@ import { createContext, useState } from "react";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const AuthContext = createContext();
+
 function App() {
-    const [authInfo, setAuthInfo] = useState(false);
     refresh_interceptor();
+    const [authInfo, setAuthInfo] = useState(false);
+    const savedAccessToken = localStorage.getItem("access");
+    if (savedAccessToken && authInfo.isLoggedIn === false) {
+        const savedUsername = localStorage.getItem("id");
+        const savedauthInfo = {
+            isLoggedIn: true,
+            id: savedUsername
+        };
+        setAuthInfo(savedauthInfo);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${savedAccessToken}`;
+    } 
     return (
         <AuthContext.Provider value={[authInfo, setAuthInfo]}>
             <BrowserRouter>
