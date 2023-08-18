@@ -114,7 +114,7 @@ function Comparetable(props){
         .then(response => {
             console.log('함수 호출 전:', response.data.id);
             getCompareId(response.data.id);
-            showResult()
+            
         })
         .catch(error => {
             console.error('오류 발생:', error);
@@ -136,7 +136,11 @@ function Comparetable(props){
                 title = {'비교하기'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
-                onClick = {dateSend}
+                onClick = {()=>{
+                    dateSend()
+                    showResult()
+                }
+                    }
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
                 
