@@ -47,15 +47,9 @@ const Logo = styled.div`
     align-items: center;
     font-size: 72px;
     font-weight: 700;
-<<<<<<< HEAD
-`
 
-
-function ItemsSearchPage (){
-=======
 `;
 function ItemsSearchPage() {
->>>>>>> 69e5fe582fc8898bb5345a4fc7d2b77e1f58c67b
     const navigate = useNavigate();
     const [value, setValue] = useState("");
     const getValue = (inputValue) => {

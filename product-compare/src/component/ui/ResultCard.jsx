@@ -158,6 +158,7 @@ function ResultCard(props){
       // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
       const apiUrl = 'http://127.0.0.1:8000/api/ocr/comparelists/';
       axios.get(apiUrl).then((res) =>{
+          console.log(res.data)
           const result_json = res.data[compareId - 1]["result"][0];
           const result_jsonValue = Object.values(Object.values(result_json))
           const resultArray = [];

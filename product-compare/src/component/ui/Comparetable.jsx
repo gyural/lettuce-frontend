@@ -119,6 +119,8 @@ function Comparetable(props){
         .catch(error => {
             console.error('오류 발생:', error);
         });
+        
+
     }
     return(
         <Wrapper>
@@ -134,16 +136,11 @@ function Comparetable(props){
                 title = {'비교하기'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
-                onClick = {() => {
-
-                    dateSend()
-                    
-
-                }
+                onClick = {dateSend}
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
                 
-            }
+            
             radius = {26}
             >
                 </Button>

@@ -11,8 +11,8 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
+    width: 230px;
+    height: 230px;
     position: relative;
     border-radius: 18px;
     box-shadow: 3px 3px 4px 3px #727171;
@@ -225,14 +225,15 @@ function ItemBox(props) {
             href={object_url} dangerouslySetInnerHTML={{ __html: object_name }}
         />
             
-            <p
+            {price && <p
                 style={{
-                    padding: '5px',
+                    padding: '0px',
                     display: 'block',
                     marginLeft: '6px',
                     width: '220px',
                 }}
-            >네이버 최저가!!!{price}원</p>
+            >₩{price}</p>}
+            
         </test>
         
     );
