@@ -5,6 +5,8 @@ import ItemBox from "../List/ItemBox";
 import axios from 'axios';
 import ParsingItemSpec from "../../ParsingFunction/ParsingItemSpec";
 import ParsingItemURL from "../../ParsingFunction/ParsingItemURL";
+import { AuthContext } from "../../App";
+import { useContext } from "react";
 const Wrapper = styled.div`
     width: auto;
     height: 300px;
@@ -56,6 +58,9 @@ function Comparetable(props){
     const showResult = props.showResult
     const getAspect = props.getAspect
     const getCompareId = props.getCompareId
+    const [authInfo, setAuthInfo] = useContext(AuthContext);
+    const isLoggedIn = authInfo.isLoggedIn;
+    const accountID = authInfo.id;
     const handleClick = () => {
         pop()
     }
@@ -106,7 +111,8 @@ function Comparetable(props){
         const jsonData = JSON.stringify(objFormat);
         console.log('최종 보내지는 데이터!!!')
         console.log(jsonData)
-        axios.post(apiUrl, jsonData,{ withCredentials: true }, {
+        axios.post(apiUrl, jsonData, {
+            withCredentials: true,
             headers: {
                 "Content-Type": "application/json"
             }
@@ -136,7 +142,12 @@ function Comparetable(props){
                 title = {'비교하기'}
                 bgcolor = '#8FDEA5'
                 color = '#000000'
-                onClick = {dateSend}
+                onClick = {()=>{
+                    if(isLoggedIn === true)
+                        dateSend();
+                    else
+                        alert('로그인하셔야 비교하기가 가능합니다');
+                }}
                 // alert('비교하기 창으로 넘어가기!!!')
                 // post로 넘겨주기
                 

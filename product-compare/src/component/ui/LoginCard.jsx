@@ -48,14 +48,26 @@ function LoginCard(props) {
         //여기에 form 데이터를 서버로 제출하는 로직을 작성하고
         //임시로 콘솔창에 출력하겠습니다.
         console.log(formData);
-        if (login(formData.id, formData.password)) {
-            const authInfo = {
-                isLoggedIn: true,
-                id: formData.id,
-            };
-            setIsLoggedIn(authInfo);
-            navigate("/");
-        }
+
+        login(formData.id, formData.password).then(
+            ()=>{
+                const authInfo = {
+                    isLoggedIn: true,
+                    id: formData.id,
+                };
+                setIsLoggedIn(authInfo);
+                navigate("/");
+            }
+        ).catch(
+            ()=>{
+                const authInfo = {
+                    isLoggedIn: false,
+                    id: '',
+                };
+                setIsLoggedIn(authInfo);
+                console.log('실패 후 처리');
+            }
+        )
     };
 
     const handleChange = (e) => {

@@ -30,13 +30,15 @@ const Container = styled.div`
 const Header = styled.div`
     width: 100%;
     height: 114px;
-    background-color: #698976;
+    background-color: #63DE68;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     box-shadow: 3px 3px 3px #bdbcbc;
     position: relative;
-    border-radius: 14px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius:15px;
+    
     img{
         height: 100%;
     }
@@ -116,7 +118,7 @@ function ItemSelect1 (){
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
-        const URL = "v1/search/shop.json";
+        const URL = "v1/search/shop.json"; // proxy 사용
         // const URL = "https://openapi.naver.com/v1/search/shop.xml"	
         const ClientID = "UON8xyX_h_yETd2UkLyZ";
         const ClientSecret = "ZszAjOj5Km";

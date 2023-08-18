@@ -8,6 +8,8 @@ import ItemSelect1 from "./component/pages/ItemSelect1";
 import CompareLogPage from "./component/pages/CompareLogPage";
 import { refresh_interceptor } from "./api/Auth";
 import { createContext, useState } from "react";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 const AuthContext = createContext();
 function App() {
     const [authInfo, setAuthInfo] = useState(false);
