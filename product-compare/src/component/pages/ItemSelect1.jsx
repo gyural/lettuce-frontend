@@ -82,7 +82,7 @@ function ItemSelect1 (){
     const [isLoading, setIsLoading] = useState(false)
     const isLoggedIn = authInfo.isLoggedIn;
     const accountID = authInfo.id;
-
+    const [compareResult, setCompareResult] = useState(null)
     const navigate = useNavigate();
     //itemBox가 클릭 되었을 때 해당 itemBox의 정보를 가져오는 함수
     const getItem = (itemInfo) => {
@@ -110,6 +110,25 @@ function ItemSelect1 (){
         console.log(id)
         setCompareId(id)
     }
+    const getCompareResult = (id) =>{
+        const compareId = id;
+        const apiUrl = process.env.REACT_APP_DJANGO_SERVER + '/api/ocr/comparelists/' + compareId;
+        return axios.get(apiUrl).then((res) =>{
+            console.log('result데이터 찍어보기!!');
+            if(res.data !== undefined){
+              console.log(res.data)
+              const result_json = res.data["result"][0]["result_json"];
+              const resultArray = [];
+              Object.keys(result_json).forEach((key) => {
+                resultArray.push(result_json[key]);
+              });
+              console.log('비교결과:'+resultArray);
+                setCompareResult(resultArray);
+            }
+            
+          }
+        );
+      }
     // Comparetable의 이전버튼이 눌러졌을때 list를 pop해주는 핸들러 함수
     const handlePop = () => {
         setSelectedItems(selectedItems => selectedItems.slice(0, -1))
@@ -122,7 +141,7 @@ function ItemSelect1 (){
     }
     // 네이버 오픈 API로 itemList에 가져오기
     const getSearchitem = async (query) => {
-        const URL = "http://"+process.env.REACT_APP_HOST_SERVER+"/api/search/shop.json"; // proxy 사용
+        const URL = process.env.REACT_APP_HOST_SERVER+"/api/search/shop.json"; // proxy 사용
         const ClientID = "UON8xyX_h_yETd2UkLyZ";
         const ClientSecret = "ZszAjOj5Km";
         await axios
@@ -293,12 +312,14 @@ function ItemSelect1 (){
                     }}
                     getAspect = {getAspect}
                     getCompareId = {getCompareId}
+                    getCompareResult = {getCompareResult}
                 />
             </CompareWrapper>}
             {resultMode && <ResultCard result='test' item={selectedItems} weight={1} onButtonClick={(_isUp)=>{setIsResultUp(_isUp)}} isUp={isResultUp} 
                         aspect = {itemAspect} 
                         aspectResult = {['측면1 결과....','측면2 결과....','측면3 결과....','측면4 결과....','측면5 결과....']}
                         compareId = {compareId}
+                        compareResult = {compareResult}
                         />}
         </>
 

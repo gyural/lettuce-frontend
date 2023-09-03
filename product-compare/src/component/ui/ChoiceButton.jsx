@@ -5,7 +5,8 @@ import image1 from "../../images/north_west_v2 (1).png"
 
 const Wrapper = styled.div`
     position: fixed;
-    top: 50%;
+    top: 20%;
+    right: 50px;
     width: 50px;
     height: 50px;
     padding: 2px;

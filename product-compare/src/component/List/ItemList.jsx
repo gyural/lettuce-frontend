@@ -20,7 +20,7 @@ function ItemList(props) {
 
 
   const getItemURL = ((productId) =>{
-    return ('http://'+process.env.REACT_APP_HOST_SERVER +'/api/catalog/' + productId)
+    return (process.env.REACT_APP_HOST_SERVER +'/api/catalog/' + productId)
   })
   const itemList = props.items;
   const mode = props.mode

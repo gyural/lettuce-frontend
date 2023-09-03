@@ -6,25 +6,29 @@ import LoginPage from "./component/pages/LoginPage";
 import SignupPage from "./component/pages/SignupPage";
 import ItemSelect1 from "./component/pages/ItemSelect1";
 import CompareLogPage from "./component/pages/CompareLogPage";
-import { refresh_interceptor } from "./api/Auth";
+import { refresh_interceptor, getUser } from "./api/Auth";
 import { createContext, useState } from "react";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const AuthContext = createContext();
-
+async function autologin(setAuthInfo) {
+    try {
+        const UserInfo = await getUser();
+        const _authInfo = {
+            isLoggedIn: true,
+            id: UserInfo.email
+        };
+        setAuthInfo(_authInfo);
+    } catch (error) {
+        console.error(error);
+    }
+}
 function App() {
     refresh_interceptor();
     const [authInfo, setAuthInfo] = useState(false);
     const savedAccessToken = localStorage.getItem("access");
-    if (savedAccessToken && authInfo.isLoggedIn === false) {
-        const savedUsername = localStorage.getItem("id");
-        const savedauthInfo = {
-            isLoggedIn: true,
-            id: savedUsername
-        };
-        setAuthInfo(savedauthInfo);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${savedAccessToken}`;
-    } 
+    if(!authInfo)
+        autologin(setAuthInfo);
     return (
         <AuthContext.Provider value={[authInfo, setAuthInfo]}>
             <BrowserRouter>

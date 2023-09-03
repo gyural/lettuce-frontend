@@ -58,6 +58,7 @@ function Comparetable(props){
     const showResult = props.showResult
     const getAspect = props.getAspect
     const getCompareId = props.getCompareId
+    const getCompareResult = props.getCompareResult
     const [authInfo, setAuthInfo] = useContext(AuthContext);
     const isLoggedIn = authInfo.isLoggedIn;
     const accountID = authInfo.id;
@@ -119,7 +120,8 @@ function Comparetable(props){
         })
         .then(response => {
             console.log('함수 호출 전:', response.data.id);
-            getCompareId(response.data.id);
+            // getCompareId(response.data.id);
+            getCompareResult(response.data.id);
             
         })
         .catch(error => {

@@ -30,7 +30,7 @@ const Card = styled.div`
     height: 105%;
     opacity: 0.98;
     /* background-color: #FAFDE7; */
-    background: #50514e;
+    background: #fafde6;
     backdrop-filter: blur(15px);
     /* box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2); */
 
@@ -161,7 +161,8 @@ const ItemTitle = styled.div`
 `;
 function ResultCard(props){
     const [focusedIndex, setFocusedIndex] = useState(0)
-    const [compareResult, setCompareResult] = useState(undefined)
+    // const [compareResult, setCompareResult] = useState(null)
+    const compareResult = props.compareResult;
     const weight = props.weight;
     const isUp = props.isUp;  
     const result = props.aspectResult;
@@ -169,17 +170,13 @@ function ResultCard(props){
     console.log('item출력')
     console.log(item)
     const onButtonClick = props.onButtonClick;
-    const aspeectList = props.aspect;
+    const aspectList = props.aspect;
     const compareId = props.compareId
-    console.log('CompareId!!!')
-    console.log(compareId)
-    useEffect(() => {
-      // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
-      const apiUrl = 'http://127.0.0.1:8000/api/ocr/comparelists/';
+    const getCompareResult = () =>{
+      const apiUrl = process.env.REACT_APP_DJANGO_SERVER + '/api/ocr/comparelists/';
       axios.get(apiUrl).then((res) =>{
-          console.log('result데이터 찍어보기!!')
-          if(res.data[compareId] !== undefined)
-          {
+          console.log('result데이터 찍어보기!!');
+          if(res.data[compareId] !== undefined){
             console.log(res.data[compareId])
             const result_json = res.data[compareId]["result"][0];
             const result_jsonValue = Object.values(Object.values(result_json))
@@ -191,10 +188,34 @@ function ResultCard(props){
               resultArray.push(result_jsonValue[0][resKey]);
             }
           }
-          console.log(resultArray)
-          setCompareResult(resultArray)}
-        })
-    }, [compareId]);
+          console.log('비교결과:'+resultArray);
+          // setCompareResult(resultArray);
+          
+        }
+      });
+    }    // useEffect(() => {
+    //   // 컴포넌트가 처음 렌더링될 때 '선풍기' 검색을 실행
+    //   const apiUrl = process.env.REACT_APP_DJANGO_SERVER + '/api/ocr/comparelists/';
+    //   axios.get(apiUrl).then((res) =>{
+    //       console.log('result데이터 찍어보기!!');
+    //       if(res.data[compareId] !== undefined){
+    //         console.log(res.data[compareId])
+    //         const result_json = res.data[compareId]["result"][0];
+    //         const result_jsonValue = Object.values(Object.values(result_json))
+    //         const resultArray = [];
+    //         console.log(result_jsonValue)
+    //         for (let i = 1; i <= 5; i++) {
+    //         const resKey = `res${i}`;
+    //         if (result_jsonValue[0].hasOwnProperty(resKey)) {
+    //           resultArray.push(result_jsonValue[0][resKey]);
+    //         }
+    //       }
+    //       console.log('비교결과:'+resultArray);
+    //       setCompareResult(resultArray);
+    //       debugger;
+    //     }
+    //   });
+    // }, [compareId]);
     
     
       
@@ -208,7 +229,7 @@ function ResultCard(props){
           <Container>
             <AspectListWrapper>
               {/* <Title>비교결과</Title> */}
-              {aspeectList.map((el, index) => (
+              {aspectList.map((el, index) => (
                 <AspectWrapper
                   key={index}
                   isFocused={focusedIndex === index}
@@ -220,14 +241,14 @@ function ResultCard(props){
             </AspectListWrapper>
             
             
-              {compareResult === undefined?  (
+              {!compareResult?  (
                 <AspectResult
                   style={{
                     position: 'absolute',
                     top: '20%',
                   }}>
                   <Loading></Loading>
-                  <p>{aspeectList[focusedIndex]} 측면 결과 가져오는중....</p>
+                  <p>{aspectList[focusedIndex]} 측면 결과 가져오는중....</p>
                 </AspectResult>
               ):
               (
